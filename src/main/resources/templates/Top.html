@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org"> <!--Thymeleaf テンプレートエンジンを使用するための宣言-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Okome販売サイト</title>
+	<!-- 外部CSSファイルのリンク -->
+	<link rel="stylesheet" href="/sass/style.css">
+	<!-- CSSファイルの配置場所 静的リソースは通常、src/main/resources/static フォルダ内に配置する必要があります -->
+</head>
+
+<body>
+
+	<!-- ヘッダー -->
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+		<form action="/login" method="post">
+			<button class="button">ログイン</button>
+		</form>
+
+	</header>
+
+	<!-- メインコンテンツ -->
+	<div class="container">
+		<form action="/search0" method="post">
+			<!-- 産地ボタン -->
+			<div class="filter-section">
+				<h3>産地</h3>
+				<button class="button" name="origin" value="1">北海道</button>
+				<button class="button" name="origin" value="2">東北</button>
+				<button class="button" name="origin" value="3">北陸</button>
+			</div>
+		</form>
+		<!-- 品種ボタン -->
+		<form action="/search1" method="post">
+			<div class="filter-section">
+				<h3>品種</h3>
+				<button class="button" name="variety" value="1">コシヒカリ</button>
+				<button class="button" name="variety" value="2">ひとめぼれ</button>
+				<button class="button" name="variety" value="3">つや姫</button>
+			</div>
+		</form>
+
+	</div>
+	<div class="search-container">
+		<form action="/search2" method="post">
+			<!-- 精米区分 -->
+			<div class="form-group">
+				<label>精米区分</label>
+				<label><input type="radio" name="millingtype" value="0" checked> 全て</label>
+				<label><input type="radio" name="millingtype" value="1"> 精米</label>
+				<label><input type="radio" name="millingtype" value="2"> 玄米</label>
+			</div>
+
+			<!-- 重量 -->
+			<div class="form-group">
+				<label for="weight">重量</label>
+				<select name="weight">
+					<option value="0" selected>全て</option>
+					<option value="1">2kg</option>
+					<option value="2">5kg</option>
+					<option value="3">10kg</option>
+				</select>
+			</div>
+
+			<!-- 価格 -->
+			<div class="form-group">
+				<label for="price_min">価格</label>
+				<select name="price_min">
+					<option value="0" selected>下限なし</option>
+					<option value="1000">1000円</option>
+					<option value="2000">2000円</option>
+					<option value="3000">3000円</option>
+					<option value="4000">4000円</option>
+					<option value="5000">5000円</option>
+					<option value="6000">6000円</option>
+					<option value="7000">7000円</option>
+					<!-- 必要に応じて価格帯を追加できます -->
+				</select>
+				〜
+				<select name="price_max">
+					<option value="1000000" selected>上限なし</option>
+					<option value="1000">1000円</option>
+					<option value="2000">2000円</option>
+					<option value="3000">3000円</option>
+					<option value="4000">4000円</option>
+					<option value="5000">5000円</option>
+					<option value="6000">6000円</option>
+					<option value="7000">7000円</option>
+					<!-- 必要に応じて価格帯を追加できます -->
+				</select>
+			</div>
+
+			<!-- 検索ボタン -->
+			<div class="form-group">
+				<button type="submit" class="search-btn">検索</button>
+			</div>
+		</form>
+	</div>
+	<!-- 商品リスト -->
+	<div class="product-list" id="product-list">
+		<!-- 商品がここに動的に表示されます -->
+
+		<p>ヒットした件数: <span th:text="${productCount}"></span></p>
+		<table border="1">
+			<thead> <!--<thead> はテーブルの見出し部分を定義-->
+				<tr>
+					<th>ID</th>
+					<th>品種</th>
+					<th>商品名</th>
+					<th>産地</th>
+					<th>種別区分</th>
+					<th>重量</th>
+					<th>価格</th>
+				</tr>
+			</thead>
+			<tbody> <!--<tbody> はデータの一覧を表示する部分-->
+				<tr th:each="product : ${products}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+					<td th:text="${product.id}"></td>
+					<td th:text="${product.variety.variety}"></td>
+					<td th:text="${product.name}"></td>
+					<td th:text="${product.prefecture.prefecture}"></td>
+					<td th:text="${product.millingtype.millingtype}"></td>
+					<td th:text="${product.weight.weight}"></td>
+					<td th:text="${product.price}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- フッター -->
+	<footer>
+		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
+
+</body>
+
+</html>

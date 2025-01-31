@@ -1,0 +1,24 @@
+# 💡 Eclipse の設定ファイルを除外
+/.project
+/.classpath
+/.settings/
+
+# 💡 Gradle のビルド成果物を除外
+/build
+/bin
+.gradle
+
+# 💡 ローカル Gradle Wrapper のキャッシュ
+/gradle/
+!gradle/wrapper/gradle-wrapper.jar  # Wrapperは残す
+
+# 💡 OS・エディタの一時ファイルを除外
+.DS_Store  # macOS
+Thumbs.db  # Windows
+.idea/     # IntelliJ IDEA
+.vscode/   # VSCode
+*.log      # ログファイル
+
+# 💡 環境ごとの設定ファイルを除外（必要なら追加）
+.env
+*.iml

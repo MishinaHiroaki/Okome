@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/* ボディのスタイル */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+/* ヘッダーのスタイル */
+header {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  text-align: center; }
+
+/* コンテンツ全体のコンテナ */
+.container {
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+/* フィルターセクション */
+.filter-section {
+  margin-bottom: 20px; }
+
+h2 {
+  margin-bottom: 20px; }
+
+h3 {
+  margin-bottom: 10px; }
+
+/* ボタンのスタイル */
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; }
+  .button:hover {
+    background-color: #45a049; }
+
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* フォームグループ */
+  /* 検索ボタン */ }
+  .search-container .form-group {
+    margin-bottom: 15px; }
+    .search-container .form-group label {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: #333; }
+    .search-container .form-group input[type="radio"] {
+      margin-right: 10px; }
+    .search-container .form-group select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px; }
+  .search-container .search-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; }
+    .search-container .search-btn:hover {
+      background-color: #45a049; }
+
+/* 商品リスト */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px; }
+  .product-list .product-item {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 80px;
+  /* フッターとの間隔 */ }
+
+tbody {
+  display: block;
+  max-height: 400px;
+  /* 必要に応じて高さを調整 */
+  overflow-y: auto; }
+
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; }
+
+/* フッターのスタイル */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0; }
+
+/*# sourceMappingURL=style.css.map */
