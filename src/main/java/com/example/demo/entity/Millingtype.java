@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity //そのクラスのインスタンス(Userクラスのこと)は、テーブルの行（レコード）としてデータベースに保存されます。
 @Table(name = "millingtypes") //millingtypesというテーブルに保存
-public class Millingtypes {
+public class Millingtype {
 	@Id //このフィールドがエンティティの識別子（主キー）であることを示します。
 	private Long id;
 	private String millingtype;

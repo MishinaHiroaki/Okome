@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Entity //そのクラスのインスタンス(Userクラスのこと)は、テーブルの行（レコード）としてデータベースに保存されます。
 @Table(name = "products") //というテーブルに保存
-public class Products {
+public class Product {
     @Id//このフィールドがエンティティの識別子（主キー）であることを示します。
     private Long id;
     private String name;
@@ -24,17 +24,17 @@ public class Products {
     
     @ManyToOne
     @JoinColumn(name = "variety_id") // 外部キー列名に合わせて変更
-    private Varieties variety; // Varietyエンティティとの関連
+    private Variety variety; // Varietyエンティティとの関連
     
     @ManyToOne
     @JoinColumn(name = "origin_id") // 外部キー列名に合わせて変更
-    private Prefectures prefecture; // エンティティとの関連
+    private Prefecture prefecture; // エンティティとの関連
     
     @ManyToOne
     @JoinColumn(name = "millingtype_id") // 外部キー列名に合わせて変更
-    private Millingtypes millingtype;
+    private Millingtype millingtype;
    
     @ManyToOne
     @JoinColumn(name = "weight_id") // 外部キー列名に合わせて変更
-    private Weights weight;
+    private Weight weight;
 }

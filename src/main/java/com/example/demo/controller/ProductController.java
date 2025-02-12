@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Products;
+import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 
 /*
@@ -35,7 +35,7 @@ public class ProductController {
 
 	@GetMapping("/")
 	public String topPage(Model model) {
-		List<Products> products = productService.getAllProducts();
+		List<Product> products = productService.getAllProducts();
 		model.addAttribute("productCount", products.size()); // ヒット件数を追加
 		model.addAttribute("products", products);
 		return "Top"; 
@@ -44,7 +44,7 @@ public class ProductController {
 	
 	@PostMapping("/search0")
 	public String search0(@RequestParam int origin,Model model) {
-		List<Products> products = productService.search0WithFilters(origin);
+		List<Product> products = productService.search0WithFilters(origin);
 		model.addAttribute("productCount", products.size()); // ヒット件数を追加
 		model.addAttribute("products", products);
 		return "Top"; 
@@ -52,7 +52,7 @@ public class ProductController {
 	
 	@PostMapping("/search1")
 	public String search1(@RequestParam int variety,Model model) {
-		List<Products> products = productService.search1WithFilters(variety);
+		List<Product> products = productService.search1WithFilters(variety);
 		model.addAttribute("productCount", products.size()); // ヒット件数を追加
 		model.addAttribute("products", products);
 		return "Top"; 
@@ -60,7 +60,7 @@ public class ProductController {
 	
 	@PostMapping("/search2")
 	public String search2(@RequestParam int millingtype,@RequestParam int weight,@RequestParam int price_min,@RequestParam int price_max, Model model) {
-		List<Products> products = productService.search2WithFilters(millingtype,weight,price_min,price_max);
+		List<Product> products = productService.search2WithFilters(millingtype,weight,price_min,price_max);
 		
 		model.addAttribute("productCount", products.size()); // ヒット件数を追加
 		model.addAttribute("products", products);

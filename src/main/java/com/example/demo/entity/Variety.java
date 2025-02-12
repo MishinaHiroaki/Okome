@@ -7,12 +7,12 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter //getter と setter メソッドを自動的に生成してくれるものです
+@Getter//getter と setter メソッドを自動的に生成してくれるものです
 @Setter
 @Entity //そのクラスのインスタンス(Userクラスのこと)は、テーブルの行（レコード）としてデータベースに保存されます。
-@Table(name = "weights") //というテーブルに保存
-public class Weights {
-	@Id //このフィールドがエンティティの識別子（主キー）であることを示します。
-	private Long id;
-	private String weight;
+@Table(name = "varieties") //varietiesというテーブルに保存
+public class Variety {
+	 @Id//このフィールドがエンティティの識別子（主キー）であることを示します。
+	    private Long id;
+	    private String variety;
 }

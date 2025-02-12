@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Products;
+import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
 
 @Service
@@ -15,19 +15,19 @@ public class ProductService {
 		this.productRepository = productRepository;
 	}
 
-	public List<Products> getAllProducts() {
+	public List<Product> getAllProducts() {
 		return productRepository.findAll();//登録されたデータベースを返す
 	}
 
-	public List<Products> search0WithFilters(int originId){
+	public List<Product> search0WithFilters(int originId){
 		return productRepository.findByPrefectureId(originId);
 	}
 	
-	public List<Products> search1WithFilters(int varietyId){
+	public List<Product> search1WithFilters(int varietyId){
 		return productRepository.findByVarietyId(varietyId);
 	}
 
-	public List<Products> search2WithFilters(int millingtypeId, int weightId, int priceMin, int priceMax) {
+	public List<Product> search2WithFilters(int millingtypeId, int weightId, int priceMin, int priceMax) {
 		if (millingtypeId == 0) {
 			if (weightId == 0) {
 				return productRepository.findByPriceBetween(priceMin, priceMax);
