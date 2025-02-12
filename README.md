@@ -8,4 +8,8 @@ https://drive.google.com/file/d/1y-LIiDvhRkxeawQA8vyzdG6vfiJgN9FN/view?usp=shari
 https://docs.google.com/spreadsheets/d/1ZHdBCyCjK46PVn01pzcgYpZs52GLShjER9NHyddiEWA/edit?usp=sharing
 
 ------
+2025/02/12
+・Entityのクラス名、単数形に修正
+・data.sqlを使ってアプリ起動時にお米の情報とかの初期データを挿入
+　->Okome データベースを作成してもらえれば初期データを挿入できるようにファイルを書きました！
 
