@@ -1,11 +1,3 @@
-DELETE FROM users;
-DELETE FROM products;
-DELETE FROM varieties;
-DELETE FROM millingtypes;
-DELETE FROM prefectures;
-DELETE FROM weights;
-
-
 INSERT INTO `varieties` (`id`, `variety`) VALUES (1,'コシヒカリ'),(2,'ひとめぼれ'),(3,'つや姫');
 INSERT INTO `millingtypes` (`id`, `millingtype`) VALUES (1,'精米'),(2,'玄米');
 INSERT INTO `prefectures` (`id`, `prefecture`) VALUES (1,'北海道'),(2,'東北'),(3,'北陸');
@@ -66,4 +58,5 @@ INSERT INTO `products` (`id`, `name`, `description`, `origin_id`, `variety_id`, 
 (51, '選ばれしつや姫', 'あとでかく', 3, 3, 1, 3, 4500, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL),
 (52, '選ばれしつや姫', 'あとでかく', 3, 3, 2, 1, 500, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL),
 (53, '選ばれしつや姫', 'あとでかく', 3, 3, 2, 2, 1500, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL),
-(54, '選ばれしつや姫', 'あとでかく', 3, 3, 2, 3, 4000, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL);
+(54, '選ばれしつや姫', 'あとでかく', 3, 3, 2, 3, 4000, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL),
+(55, 'テスト', 'あとでかく', 3, 3, 2, 3, 4000, 10, '2025-01-28 02:51:40', '2025-01-29 04:43:23', NULL);

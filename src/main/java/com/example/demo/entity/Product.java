@@ -37,4 +37,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "weight_id") // 外部キー列名に合わせて変更
     private Weight weight;
+    
+    
+    
 }
