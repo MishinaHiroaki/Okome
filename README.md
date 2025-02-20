@@ -25,3 +25,10 @@ spring.jpa.hibernate.ddl-auto=update が動いていたため、三品の環境�
 
 2025/02/20 メモ　cssを更新するコマンド 
  sass --watch src/main/resources/static/sass/style.scss:src/main/resources/static/css/style.css
+
+ gitにupする時のコマンド
+ cd /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/
+ git pull
+ git commit -m "コメント"
+ git push
+
