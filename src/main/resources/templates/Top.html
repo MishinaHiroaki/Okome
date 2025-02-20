@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Okome販売サイト</title>
 	<!-- 外部CSSファイルのリンク -->
-	<link rel="stylesheet" href="/sass/style.css">
+	<link rel="stylesheet" href="/css/style.css">
 	<!-- CSSファイルの配置場所 静的リソースは通常、src/main/resources/static フォルダ内に配置する必要があります -->
 </head>
 
@@ -102,35 +102,30 @@
 			</div>
 		</form>
 	</div>
-	<!-- 商品リスト -->
-	<div class="product-list" id="product-list">
+	<!-- 商品 -->
+	<div class="hitcount">ヒットした件数: <span th:text="${productCount}"></span></div>
+	<div class="product">
 		<!-- 商品がここに動的に表示されます -->
+		<div class="eachprocon" th:each="product : ${products}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+			<div class="titlepro" th:text="${'[' + product.prefecture.prefecture + '産]  ' + product.name + '  (' + product.millingtype.millingtype + ')'}"></div>
+			<div class="procon">
+				<div class="procon-image">
+					<img th:src="${product.imageurl}" alt="商品の画像">
+				</div>
+				<div class="procon-content">
 
-		<p>ヒットした件数: <span th:text="${productCount}"></span></p>
-		<table border="1">
-			<thead> <!--<thead> はテーブルの見出し部分を定義-->
-				<tr>
-					<th>ID</th>
-					<th>品種</th>
-					<th>商品名</th>
-					<th>産地</th>
-					<th>種別区分</th>
-					<th>重量</th>
-					<th>価格</th>
-				</tr>
-			</thead>
-			<tbody> <!--<tbody> はデータの一覧を表示する部分-->
-				<tr th:each="product : ${products}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
-					<td th:text="${product.id}"></td>
-					<td th:text="${product.variety.variety}"></td>
-					<td th:text="${product.name}"></td>
-					<td th:text="${product.prefecture.prefecture}"></td>
-					<td th:text="${product.millingtype.millingtype}"></td>
-					<td th:text="${product.weight.weight}"></td>
-					<td th:text="${product.price}"></td>
-				</tr>
-			</tbody>
-		</table>
+					<div class="description" th:text="${product.description}"></div>
+
+					<div class="ingredients"
+						th:text="${product.weight.weight + ':' + product.price + '円' }">
+					</div>
+
+					<div class="button-container">
+						<a href="#" class="procon-button">商品詳細ページへ</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- フッター -->

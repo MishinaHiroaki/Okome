@@ -84,36 +84,62 @@ h3 {
     .search-container .search-btn:hover {
       background-color: #45a049; }
 
-/* 商品リスト */
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px; }
-  .product-list .product-item {
-    border: 1px solid #ddd;
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.hitcount {
+  text-align: center;
+  font-size: 20px; }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 80px;
-  /* フッターとの間隔 */ }
-
-tbody {
-  display: block;
-  max-height: 400px;
-  /* 必要に応じて高さを調整 */
-  overflow-y: auto; }
-
-thead, tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed; }
+.product {
+  margin: 0 auto 80px auto;
+  max-width: 700px; }
+  .product .titlepro {
+    color: #3C6196;
+    font-size: 30px; }
+  .product .eachprocon {
+    padding: 10px 30px;
+    border: 0.5px solid black;
+    border-radius: 8px;
+    margin-bottom: 30px; }
+    .product .eachprocon .procon {
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+      align-items: stretch; }
+      .product .eachprocon .procon .procon-image {
+        flex: 3; }
+        .product .eachprocon .procon .procon-image img {
+          width: 100%;
+          /* 親要素の幅と同じにする */
+          height: auto;
+          /* 高さも親と同じにする（オプション） */
+          display: block;
+          padding: 0px; }
+      .product .eachprocon .procon .procon-content {
+        width: 100%;
+        /* 親要素の幅と同じにする */
+        flex: 7;
+        /* 70% */
+        padding: 0px 20px; }
+        .product .eachprocon .procon .procon-content .description {
+          font-size: 20px;
+          color: #555; }
+        .product .eachprocon .procon .procon-content .ingredients {
+          font-size: 40px;
+          color: red; }
+        .product .eachprocon .procon .procon-content .button-container {
+          text-align: center;
+          margin-top: 20px; }
+          .product .eachprocon .procon .procon-content .button-container .procon-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: 0.3s; }
+            .product .eachprocon .procon .procon-content .button-container .procon-button:hover {
+              background-color: #333;
+              color: #fff; }
 
 /* フッターのスタイル */
 footer {
