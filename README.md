@@ -22,3 +22,6 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'updated_at' in 'fie
 以下の原因が考えられる
 spring.jpa.hibernate.ddl-auto=update が動いていたため、三品の環境では Hibernate により created_at、updated_at カラムが自動追加された可能性が高い。
 解決策として schema.sql を追加し、spring.jpa.hibernate.ddl-auto=none に変更 することで、環境依存をなくした。
+
+2025/02/20 メモ　cssを更新するコマンド 
+ sass --watch src/main/resources/static/sass/style.scss:src/main/resources/static/css/style.css
