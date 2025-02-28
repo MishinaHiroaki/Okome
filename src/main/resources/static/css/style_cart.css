@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* ボディのスタイル */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+/* ヘッダーのスタイル */
+header {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  text-align: center; }
+
+/* ボタンのスタイル */
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; }
+  .button:hover {
+    background-color: #45a049; }
+  .button.shop {
+    background-color: orange;
+    font-size: 30px; }
+    .button.shop:hover {
+      background-color: darkorange; }
+
+/* コンテンツ全体のコンテナ */
+.container {
+  padding: 20px;
+  width: 100%;
+  text-align: center; }
+  .container .titlecart {
+    font-size: 50px; }
+  .container .product {
+    margin: 30px auto 80px auto;
+    max-width: 700px; }
+    .container .product .titlepro {
+      color: #3C6196;
+      font-size: 30px; }
+    .container .product .eachprocon {
+      padding: 10px 30px;
+      border: 0.5px solid black;
+      border-radius: 8px;
+      margin-bottom: 30px; }
+      .container .product .eachprocon .procon {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        align-items: stretch; }
+        .container .product .eachprocon .procon .procon-image {
+          flex: 3; }
+          .container .product .eachprocon .procon .procon-image img {
+            width: 100%;
+            /* 親要素の幅と同じにする */
+            height: auto;
+            /* 高さも親と同じにする（オプション） */
+            display: block;
+            padding: 0px; }
+        .container .product .eachprocon .procon .procon-content {
+          width: 100%;
+          /* 親要素の幅と同じにする */
+          flex: 4;
+          /* 70% */
+          padding: 0px 20px;
+          /* 親要素の幅を固定 */ }
+          .container .product .eachprocon .procon .procon-content .ingredients {
+            font-size: 30px;
+            color: red; }
+          .container .product .eachprocon .procon .procon-content .quant {
+            font-size: 30px;
+            color: blue; }
+          .container .product .eachprocon .procon .procon-content .cnt {
+            font-size: 40px;
+            color: red; }
+        .container .product .eachprocon .procon .delbtn {
+          flex: 3;
+          font-size: 30px; }
+    .container .product .totalAmount {
+      font-size: 50px; }
+  .container .twobtn {
+    text-align: center; }
+
+/* フッターのスタイル */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0; }
+
+/*# sourceMappingURL=style_cart.css.map */

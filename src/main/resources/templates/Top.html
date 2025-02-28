@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Okome販売サイト</title>
 	<!-- 外部CSSファイルのリンク -->
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<!-- CSSファイルの配置場所 静的リソースは通常、src/main/resources/static フォルダ内に配置する必要があります -->
 </head>
 
@@ -52,19 +52,19 @@
 			<!-- 精米区分 -->
 			<div class="form-group">
 				<label>精米区分</label>
-				<label><input type="radio" name="millingtype" value="0" checked> 全て</label>
-				<label><input type="radio" name="millingtype" value="1"> 精米</label>
-				<label><input type="radio" name="millingtype" value="2"> 玄米</label>
+				<label><input type="radio" name="millingtype" value="0" th:checked="${millingtype == 0}"> 全て</label>
+				<label><input type="radio" name="millingtype" value="1" th:checked="${millingtype == 1}"> 精米</label>
+				<label><input type="radio" name="millingtype" value="2" th:checked="${millingtype == 2}"> 玄米</label>
 			</div>
 
 			<!-- 重量 -->
 			<div class="form-group">
 				<label for="weight">重量</label>
 				<select name="weight">
-					<option value="0" selected>全て</option>
-					<option value="1">2kg</option>
-					<option value="2">5kg</option>
-					<option value="3">10kg</option>
+					<option value="0" th:selected="${weight == 0}">全て</option>
+					<option value="1" th:selected="${weight == 1}">2kg</option>
+					<option value="2" th:selected="${weight == 2}">5kg</option>
+					<option value="3" th:selected="${weight == 3}">10kg</option>
 				</select>
 			</div>
 
@@ -72,26 +72,26 @@
 			<div class="form-group">
 				<label for="price_min">価格</label>
 				<select name="price_min">
-					<option value="0" selected>下限なし</option>
-					<option value="1000">1000円</option>
-					<option value="2000">2000円</option>
-					<option value="3000">3000円</option>
-					<option value="4000">4000円</option>
-					<option value="5000">5000円</option>
-					<option value="6000">6000円</option>
-					<option value="7000">7000円</option>
+					<option value="0" th:selected="${price_min == 0}">下限なし</option>
+					<option value="1000" th:selected="${price_min == 1000}">1000円</option>
+					<option value="2000" th:selected="${price_min == 2000}">2000円</option>
+					<option value="3000" th:selected="${price_min == 3000}">3000円</option>
+					<option value="4000" th:selected="${price_min == 4000}">4000円</option>
+					<option value="5000" th:selected="${price_min == 5000}">5000円</option>
+					<option value="6000" th:selected="${price_min == 6000}">6000円</option>
+					<option value="7000" th:selected="${price_min == 7000}">7000円</option>
 					<!-- 必要に応じて価格帯を追加できます -->
 				</select>
 				〜
 				<select name="price_max">
-					<option value="1000000" selected>上限なし</option>
-					<option value="1000">1000円</option>
-					<option value="2000">2000円</option>
-					<option value="3000">3000円</option>
-					<option value="4000">4000円</option>
-					<option value="5000">5000円</option>
-					<option value="6000">6000円</option>
-					<option value="7000">7000円</option>
+					<option value="1000000" th:selected="${price_max == 1000000}">上限なし</option>
+					<option value="1000" th:selected="${price_max == 1000}">1000円</option>
+					<option value="2000" th:selected="${price_max == 2000}">2000円</option>
+					<option value="3000" th:selected="${price_max == 3000}">3000円</option>
+					<option value="4000" th:selected="${price_max == 4000}">4000円</option>
+					<option value="5000" th:selected="${price_max == 5000}">5000円</option>
+					<option value="6000" th:selected="${price_max == 6000}">6000円</option>
+					<option value="7000" th:selected="${price_max == 7000}">7000円</option>
 					<!-- 必要に応じて価格帯を追加できます -->
 				</select>
 			</div>
@@ -107,7 +107,9 @@
 	<div class="product">
 		<!-- 商品がここに動的に表示されます -->
 		<div class="eachprocon" th:each="product : ${products}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
-			<div class="titlepro" th:text="${'[' + product.prefecture.prefecture + '産]  ' + product.name + '  (' + product.millingtype.millingtype + ')'}"></div>
+			<div class="titlepro"
+				th:text="${'[' + product.prefecture.prefecture + '産]  ' + product.name + '  (' + product.millingtype.millingtype + ')'}">
+			</div>
 			<div class="procon">
 				<div class="procon-image">
 					<img th:src="${product.imageurl}" alt="商品の画像">
@@ -116,12 +118,14 @@
 
 					<div class="description" th:text="${product.description}"></div>
 
-					<div class="ingredients"
-						th:text="${product.weight.weight + ':' + product.price + '円' }">
+					<div class="ingredients" th:text="${product.weight.weight + ':' + product.price + '円' }">
 					</div>
 
 					<div class="button-container">
-						<a href="#" class="procon-button">商品詳細ページへ</a>
+						<form action="/productDetail" method="post">
+							<input type="hidden" name="productId" th:value="${product.id}">
+							<button type="submit" class="procon-button">商品詳細ページへ</button>
+						</form>
 					</div>
 				</div>
 			</div>

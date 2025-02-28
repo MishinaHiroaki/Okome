@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS varieties;
 DROP TABLE IF EXISTS millingtypes;
 DROP TABLE IF EXISTS prefectures;
 DROP TABLE IF EXISTS weights;
+
+DROP TABLE IF EXISTS carts;
 SET FOREIGN_KEY_CHECKS=1;
 
 
@@ -57,6 +59,35 @@ CREATE TABLE products (
   CONSTRAINT FK7rkyavsqcsv6d39cksqyvmgiu FOREIGN KEY (millingtype_id) REFERENCES millingtypes (id),
   CONSTRAINT FK81je30putk4g0bknxb43qwjsg FOREIGN KEY (weight_id) REFERENCES weights (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `carts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `product_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `quantity` INT NOT NULL,
+  `price` INT NOT NULL,
+  `totalprice` INT NOT NULL,
+  `origin_id` BIGINT NOT NULL,
+  `variety_id` BIGINT NOT NULL,
+  `millingtype_id` BIGINT NOT NULL,
+  `weight_id` BIGINT NOT NULL,
+  `imageurl` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+
+  -- 🔹 インデックスを有効化
+  KEY `FK_carts_product` (`product_id`),
+  KEY `FK_carts_variety` (`variety_id`),
+  KEY `FK_carts_origin` (`origin_id`),
+  KEY `FK_carts_millingtype` (`millingtype_id`),
+  KEY `FK_carts_weight` (`weight_id`),
+
+  -- 🔹 外部キー制約（統一 + `ON DELETE CASCADE` を追加）
+  CONSTRAINT `FK_carts_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_carts_variety` FOREIGN KEY (`variety_id`) REFERENCES `varieties` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_carts_origin` FOREIGN KEY (`origin_id`) REFERENCES `prefectures` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_carts_millingtype` FOREIGN KEY (`millingtype_id`) REFERENCES `millingtypes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_carts_weight` FOREIGN KEY (`weight_id`) REFERENCES `weights` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,

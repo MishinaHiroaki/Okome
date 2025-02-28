@@ -26,6 +26,10 @@ public class ProductService {
 	public List<Product> search1WithFilters(int varietyId){
 		return productRepository.findByVarietyId(varietyId);
 	}
+	
+	public Product getProductById(int productId) {
+		return productRepository.findById(productId);
+	}
 
 	public List<Product> search2WithFilters(int millingtypeId, int weightId, int priceMin, int priceMax) {
 		if (millingtypeId == 0) {

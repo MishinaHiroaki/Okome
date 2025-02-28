@@ -24,4 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> { //<エ
 	
 	public List<Product> findByMillingtypeIdAndWeightIdAndPriceBetween(int millingtypeId, int weightId, int priceMin, int priceMax);
 	
+	
+	///roductDetail
+	public Product findById(int productId);
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>商品詳細</title>
+	<link rel="stylesheet" th:href="@{/css/style2.css}">
+</head>
+
+
+<body>
+	<!-- ヘッダー -->
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+		<form action="/login" method="post">
+			<button class="button">ログイン</button>
+		</form>
+
+	</header>
+	<div class="product">
+		<!-- 商品がここに動的に表示されます -->
+		<div class="eachprocon" th:each="product : ${product}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+			<div class="titlepro"
+				th:text="${'[' + product.prefecture.prefecture + '産]  ' + product.name + '  (' + product.millingtype.millingtype + ')'}">
+			</div>
+			<div class="procon">
+				<div class="procon-image">
+					<img th:src="${product.imageurl}" alt="商品の画像">
+				</div>
+				<di class="procon-content">
+
+					<div class="description" th:text="${product.description}"></div>
+					<div class="procon-iq">
+						<div class="ingredients" th:text="${product.weight.weight + ':' + product.price + '円' }">
+						</div>
+						x
+						<div class="button-container">
+							<form action="/cart" method="post">
+								<input type="hidden" name="productId" th:value="${product.id}">
+								<div class="quantity">
+									<select name="quantity">
+										<option th:if="${product.stock_quantity == 0}" th:text="在庫ありません" value="0"
+											disabled>
+										</option>
+										<option th:unless="${product.stock_quantity == 0}"
+											th:each="i : ${#numbers.sequence(1, product.stock_quantity)}"
+											th:value="${i}" th:text="${i}">
+										</option>
+									</select>
+									個
+								</div>
+								<button type="submit" class="procon-button">カートに入れる</button>
+							</form>
+						</div>
+					</div>
+
+					<button class="button" onclick="history.back()">Topページへ戻る</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!-- フッター -->
+	<footer>
+		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
+</body>
+
+</html>
