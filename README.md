@@ -35,6 +35,7 @@ top.html の検索結果表示を、テーブル構造から整ったレイア�
  gitにupする時のコマンド
  cd /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/
  git pull
+ git add .
  git commit -m "コメント"
  git push
 
