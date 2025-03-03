@@ -31,7 +31,7 @@
 				<div class="procon-image">
 					<img th:src="${product.imageurl}" alt="商品の画像">
 				</div>
-				<di class="procon-content">
+				<div class="procon-content">
 
 					<div class="description" th:text="${product.description}"></div>
 					<div class="procon-iq">
@@ -43,25 +43,23 @@
 								<input type="hidden" name="productId" th:value="${product.id}">
 								<div class="quantity">
 									<select name="quantity">
-										<option th:if="${product.stock_quantity == 0}" th:text="在庫ありません" value="0"
-											disabled>
+										<option th:if="${zaiko == 0}" th:text="在庫ありません" value="0" disabled>
 										</option>
-										<option th:unless="${product.stock_quantity == 0}"
-											th:each="i : ${#numbers.sequence(1, product.stock_quantity)}"
+										<option th:unless="${zaiko == 0}" th:each="i : ${#numbers.sequence(1, zaiko)}"
 											th:value="${i}" th:text="${i}">
 										</option>
 									</select>
 									個
 								</div>
-								<button type="submit" class="procon-button">カートに入れる</button>
+								<button type="submit" class="procon-button" th:disabled="${zaiko == 0}">カートに入れる</button>
 							</form>
 						</div>
 					</div>
 
 					<button class="button" onclick="history.back()">Topページへ戻る</button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<!-- フッター -->

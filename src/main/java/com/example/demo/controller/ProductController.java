@@ -78,7 +78,22 @@ public class ProductController {
 	public String showProductDetail(@RequestParam int productId, Model model) {
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
+		List<Cart> cart = cartService.searchZaiko(productId);
+		int quantity;
+		if (cart != null) {
+			quantity = cart.stream().mapToInt(Cart::getQuantity).sum();
+		  
+		} else {
+		    // cart が null の場合の処理（例えば 0 をセットするなど）
+		    quantity = 0;
+		}
+		
+		
+		int zaiko = product.getStock_quantity() - quantity;
+		
 		model.addAttribute("product", product);
+		
+		model.addAttribute("zaiko", zaiko);
 
 		return "ProductDetail";
 	}

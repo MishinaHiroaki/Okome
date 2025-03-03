@@ -29,4 +29,8 @@ public class CartService {
 	
 	}
 	
+	public List<Cart> searchZaiko(int productId) {
+		return cartRepository.findByProductId(productId);
+	}
+	
 }

@@ -90,10 +90,16 @@ header {
           border: 1px solid #333;
           border-radius: 5px;
           transition: 0.3s;
-          font-size: 30px; }
+          font-size: 30px;
+          /* 無効（disabled）状態のスタイル */ }
           .product .eachprocon .procon .procon-content .button-container .procon-button:hover {
             background-color: #333;
             color: #fff; }
+          .product .eachprocon .procon .procon-content .button-container .procon-button:disabled {
+            background-color: #ccc;
+            color: #888;
+            border: 1px solid #888;
+            cursor: not-allowed; }
 
 /* フッターのスタイル */
 footer {

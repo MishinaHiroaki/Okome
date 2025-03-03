@@ -87,7 +87,8 @@ header {
     .container .product .totalAmount {
       font-size: 50px; }
   .container .twobtn {
-    text-align: center; }
+    text-align: center;
+    margin-bottom: 100px; }
 
 /* フッターのスタイル */
 footer {

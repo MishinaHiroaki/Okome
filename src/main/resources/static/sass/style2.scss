@@ -126,6 +126,14 @@ header {
 							background-color: #333;
 							color: #fff;
 						}
+
+						/* 無効（disabled）状態のスタイル */
+						&:disabled {
+							background-color: #ccc;
+							color: #888;
+							border: 1px solid #888;
+							cursor: not-allowed;
+						}
 					}
 
 				}
