@@ -22,6 +22,9 @@
 		<form action="/login" method="post">
 			<button class="button">ログイン</button>
 		</form>
+		<form action="/cart" method="get">
+			<button class="button cart">カート確認</button>
+		</form>
 
 	</header>
 
@@ -102,6 +105,7 @@
 			</div>
 		</form>
 	</div>
+
 	<!-- 商品 -->
 	<div class="hitcount">ヒットした件数: <span th:text="${productCount}"></span></div>
 	<div class="product">
