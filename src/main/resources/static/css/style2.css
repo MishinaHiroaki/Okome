@@ -34,6 +34,10 @@ header {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px; }
+  .button.cart {
+    background-color: orange; }
+    .button.cart:hover {
+      background-color: darkorange; }
   .button:hover {
     background-color: #45a049; }
 

@@ -29,6 +29,14 @@ header {
 	cursor: pointer;
 	border-radius: 5px;
 
+	&.cart {
+		background-color: orange;
+
+		&:hover {
+			background-color: darkorange;
+		}
+	}
+
 	&:hover {
 		background-color: #45a049;
 	}
