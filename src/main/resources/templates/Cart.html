@@ -54,7 +54,7 @@
 				</form>
 
 				<form action="/order" method="GET">
-					<button class="button order">注文手続きへ</button>
+					<button class="button order" th:disabled="${totalAmount == 0}">注文手続きへ</button>
 				</form>
 			</div>
 		</div>

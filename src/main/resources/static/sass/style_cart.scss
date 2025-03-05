@@ -49,15 +49,19 @@ header {
 			background-color: darkorange;
 		}
 	}
-	&.order {
-			background-color: black;
-			font-size: 30px;
 
-		
-			&:hover {
-				background-color: #3C6196;
-			}
+	&.order {
+		background-color: white;
+		font-size: 30px;
+		color: #333;
+		border: 1px solid #333;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: #333;
+			color: white;
 		}
+	}
 }
 
 /* コンテンツ全体のコンテナ */

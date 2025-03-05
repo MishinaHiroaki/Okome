@@ -37,10 +37,14 @@ header {
     .button.shop:hover {
       background-color: darkorange; }
   .button.order {
-    background-color: black;
-    font-size: 30px; }
+    background-color: white;
+    font-size: 30px;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 5px; }
     .button.order:hover {
-      background-color: #3C6196; }
+      background-color: #333;
+      color: white; }
 
 /* コンテンツ全体のコンテナ */
 .container {
