@@ -25,33 +25,25 @@ header {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px; }
-  .button.cart {
-    background-color: orange; }
-    .button.cart:hover {
-      background-color: darkorange; }
-  .button:hover {
-    background-color: #45a049; }
-  .button.shop {
-    background-color: orange;
-    font-size: 30px; }
-    .button.shop:hover {
-      background-color: darkorange; }
   .button.order {
     background-color: black;
     font-size: 30px; }
     .button.order:hover {
       background-color: #3C6196; }
+  .button.shop {
+    background-color: orange;
+    font-size: 30px; }
+    .button.shop:hover {
+      background-color: darkorange; }
 
 /* コンテンツ全体のコンテナ */
 .container {
-  padding: 20px;
+  padding: 20px 0px;
   width: 100%;
   text-align: center; }
-  .container .titlecart {
-    font-size: 50px; }
   .container .product {
-    margin: 30px auto 80px auto;
-    max-width: 700px; }
+    margin: 30px auto 0px auto;
+    max-width: 600px; }
     .container .product .titlepro {
       color: #3C6196;
       font-size: 30px; }
@@ -90,14 +82,52 @@ header {
           .container .product .eachprocon .procon .procon-content .cnt {
             font-size: 40px;
             color: red; }
-        .container .product .eachprocon .procon .delbtn {
-          flex: 3;
-          font-size: 30px; }
     .container .product .totalAmount {
-      font-size: 50px; }
-  .container .twobtn {
-    text-align: center;
-    margin-bottom: 100px; }
+      font-size: 50px;
+      margin-bottom: 20px; }
+
+.section_title {
+  text-align: left;
+  font-size: 20pt;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #666666;
+  padding: 3pt;
+  width: 90%;
+  max-width: 1100px;
+  border: none;
+  padding: 0;
+  margin: auto; }
+
+.container2 {
+  text-align: center;
+  margin-bottom: 100px; }
+  .container2 .row_container {
+    width: 100%;
+    display: flex;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 30px; }
+    .container2 .row_container .td1 {
+      border: 1pt solid #cccccc;
+      background-color: #ffffff;
+      padding: 15pt; }
+    .container2 .row_container .td2 {
+      border: 1pt solid #cccccc;
+      background-color: #ffffff;
+      padding: 15pt; }
+    .container2 .row_container .box_col_1 {
+      width: 25%;
+      text-align: left; }
+    .container2 .row_container .box_col_2 {
+      width: 75%;
+      text-align: left; }
+      .container2 .row_container .box_col_2 input {
+        height: 30px;
+        font-size: 35px;
+        padding: 10px; }
 
 /* フッターのスタイル */
 footer {
@@ -109,4 +139,4 @@ footer {
   width: 100%;
   bottom: 0; }
 
-/*# sourceMappingURL=style_cart.css.map */
+/*# sourceMappingURL=style_order1.css.map */

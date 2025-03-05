@@ -21,7 +21,7 @@
 		</form>
 	</header>
 	<div class="container">
-		<div class="titlecart">カートに入れた商品</divclass>
+		<div class="titlecart">カートに入れた商品</div>
 			<div class="product">
 				<!-- 商品がここに動的に表示されます -->
 				<div class="eachprocon" th:each="cart : ${carts}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
@@ -51,6 +51,10 @@
 			<div class="twobtn">
 				<form action="/" method="GET">
 					<button class="button shop">ショッピングを続ける</button>
+				</form>
+
+				<form action="/order" method="GET">
+					<button class="button order">注文手続きへ</button>
 				</form>
 			</div>
 		</div>

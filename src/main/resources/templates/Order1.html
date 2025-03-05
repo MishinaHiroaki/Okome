@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>注文画面</title>
+	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
+</head>
+
+<body>
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+		<form action="/login" method="post">
+			<button class="button">ログイン</button>
+		</form>
+	</header>
+	<div class="container">
+		<div class="section_title">▼ご注文の商品を確認してください</div>
+		<div class="product">
+			<!-- 商品がここに動的に表示されます -->
+			<div class="eachprocon" th:each="cart : ${carts}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+				<div class="titlepro"
+					th:text="${'[' + cart.prefecture.prefecture + '産]  ' + cart.name + '  (' + cart.millingtype.millingtype + ')'}">
+				</div>
+				<div class="procon">
+					<div class="procon-image">
+						<img th:src="${cart.imageurl}" alt="商品の画像">
+					</div>
+					<div class="procon-content">
+						<div class="ingredients" th:text="${cart.weight.weight + ':' + cart.price + '円' }">
+						</div>
+						<div class="quant" th:text="${'個数: ' + cart.quantity}"></div>
+						<div class="cnt" th:text="'計: ' + ${cart.totalprice} + '円'"></div>
+					</div>
+				</div>
+			</div>
+			<div class="totalAmount" style="text-decoration: underline" th:text="${'カート合計金額: ' + totalAmount + '円'}">
+			</div>
+			<button class="button shop" onclick="history.back()">ご注文内容の変更</button>
+		</div>
+	</div>
+
+	<form action="/checkout" method="post">
+		<div class="container2">
+			<div class="section_title">▼ご注文者様の情報を入力して下さい</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">名前：</div>
+				<div class="td2 box_col_2">
+					<input type="text" name="name" size="20" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">メールアドレス：</div>
+				<div class="td2 box_col_2">
+					<input type="email" name="email" style="width:75%;" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">パスワード：</div>
+				<div class="td2 box_col_2">
+					<input type="password" name="password" style="width:75%;" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">パスワード確認：</div>
+				<div class="td2 box_col_2">
+					<input type="password" name="password" style="width:75%;" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">郵便番号：</div>
+				<div class="td2 box_col_2">
+					<input type="text" name="postal_code" size="10" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">ご住所：</div>
+				<div class="td2 box_col_2">
+					<input type="text" name="address" style="width:95%;" required><br>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">電話番号：</div>
+				<div class="td2 box_col_2">
+					<input type="text" name="phone" size="10" required><br>
+				</div>
+			</div>
+				<button class="button shop">ご注文内容の確認へ</button>
+		</div>
+	</form>
+	</div>
+	<footer>
+		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
+
+</body>
+
+</html>

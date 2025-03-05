@@ -147,5 +147,16 @@ public class ProductController {
 	    System.out.println("cartId: " + cartId);
 	    return "redirect:/cart"; // 削除後、カート画面をリロード
 	}
+	
+	@GetMapping("/order")   //test
+	public String order(Model model) {
+		 List<Cart> carts = cartService.getAllCarts();
+		    int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
+
+		    model.addAttribute("carts", carts);
+		    model.addAttribute("totalAmount", totalAmount);
+		return "Order1";
+	}
+	
 
 }

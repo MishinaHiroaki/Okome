@@ -7,6 +7,7 @@ body {
 	padding: 0;
 }
 
+
 /* ヘッダーのスタイル */
 header {
 	background-color: #333;
@@ -16,6 +17,7 @@ header {
 }
 
 /* ボタンのスタイル */
+
 .button {
 	background-color: #4CAF50;
 	border: none;
@@ -29,16 +31,14 @@ header {
 	cursor: pointer;
 	border-radius: 5px;
 
-	&.cart {
-		background-color: orange;
+	&.order {
+		background-color: black;
+		font-size: 30px;
+
 
 		&:hover {
-			background-color: darkorange;
+			background-color: #3C6196;
 		}
-	}
-
-	&:hover {
-		background-color: #45a049;
 	}
 
 	&.shop {
@@ -49,30 +49,17 @@ header {
 			background-color: darkorange;
 		}
 	}
-	&.order {
-			background-color: black;
-			font-size: 30px;
-
-		
-			&:hover {
-				background-color: #3C6196;
-			}
-		}
 }
 
 /* コンテンツ全体のコンテナ */
 .container {
-	padding: 20px;
+	padding: 20px 0px;
 	width: 100%;
 	text-align: center;
 
-	.titlecart {
-		font-size: 50px;
-	}
-
 	.product {
-		margin: 30px auto 80px auto;
-		max-width: 700px;
+		margin: 30px auto 0px auto;
+		max-width: 600px;
 
 		.titlepro {
 			color: #3C6196;
@@ -127,22 +114,69 @@ header {
 						color: red;
 					}
 				}
-
-				.delbtn {
-					flex: 3;
-					font-size: 30px;
-				}
 			}
 		}
 
 		.totalAmount {
 			font-size: 50px;
+			margin-bottom: 20px;
 		}
 	}
+}
 
-	.twobtn {
-		text-align: center;
-		margin-bottom: 100px;
+.section_title {
+	text-align: left;
+	font-size: 20pt;
+	color: #ffffff;
+	font-weight: bold;
+	background-color: #666666;
+	padding: 3pt;
+	width: 90%;
+	max-width: 1100px;
+	border: none;
+	padding: 0;
+	margin: auto;
+}
+
+.container2 {
+	text-align: center;
+	margin-bottom: 100px;
+	.row_container {
+		width: 100%;
+		display: flex;
+		max-width: 1100px;
+		margin: auto;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		font-size: 30px;
+
+		.td1 {
+			border: 1pt solid #cccccc;
+			background-color: #ffffff;
+			padding: 15pt;
+		}
+
+		.td2 {
+			border: 1pt solid #cccccc;
+			background-color: #ffffff;
+			padding: 15pt;
+		}
+
+		.box_col_1 {
+			width: 25%;
+			text-align: left;
+		}
+
+		.box_col_2 {
+			width: 75%;
+			text-align: left;
+
+			input {
+				height: 30px;
+				font-size: 35px;
+				padding: 10px;
+			}
+		}
 	}
 }
 

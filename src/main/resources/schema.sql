@@ -1,7 +1,8 @@
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS products;
-
+DROP TABLE IF EXISTS orderitems;
+DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS varieties;
 DROP TABLE IF EXISTS millingtypes;
 DROP TABLE IF EXISTS prefectures;
@@ -74,14 +75,14 @@ CREATE TABLE `carts` (
   `imageurl` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
 
-  -- 🔹 インデックスを有効化
+  --  インデックスを有効化
   KEY `FK_carts_product` (`product_id`),
   KEY `FK_carts_variety` (`variety_id`),
   KEY `FK_carts_origin` (`origin_id`),
   KEY `FK_carts_millingtype` (`millingtype_id`),
   KEY `FK_carts_weight` (`weight_id`),
 
-  -- 🔹 外部キー制約（統一 + `ON DELETE CASCADE` を追加）
+  --  外部キー制約（統一 + `ON DELETE CASCADE` を追加）
   CONSTRAINT `FK_carts_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_carts_variety` FOREIGN KEY (`variety_id`) REFERENCES `varieties` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_carts_origin` FOREIGN KEY (`origin_id`) REFERENCES `prefectures` (`id`) ON DELETE CASCADE,
@@ -100,3 +101,49 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `orders`(
+`id` INT NOT NULL AUTO_INCREMENT,
+`user_id` INT NOT NULL,
+`totalprice` INT NOT NULL,
+`status` INT NOT NULL,
+`stripe_customer_id` varchar(255) DEFAULT NULL,
+`created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+`updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`),
+--  外部キー制約
+  CONSTRAINT `FK_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE `orderitems` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `order_id` INT NOT NULL,          --  注文ごとの識別ID
+  `product_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `quantity` INT NOT NULL,
+  `price` INT NOT NULL,
+  `totalprice` INT NOT NULL,
+  `origin_id` BIGINT NOT NULL,
+  `variety_id` BIGINT NOT NULL,
+  `millingtype_id` BIGINT NOT NULL,
+  `weight_id` BIGINT NOT NULL,
+  `imageurl` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  --  インデックスを有効化
+  KEY `FK_orderitems_order` (`order_id`),
+  KEY `FK_orderitems_product` (`product_id`),
+  KEY `FK_orderitems_variety` (`variety_id`),
+  KEY `FK_orderitems_origin` (`origin_id`),
+  KEY `FK_orderitems_millingtype` (`millingtype_id`),
+  KEY `FK_orderitems_weight` (`weight_id`),
+  
+  --  外部キー制約
+  CONSTRAINT `FK_orderitems_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_orderitems_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_orderitems_variety` FOREIGN KEY (`variety_id`) REFERENCES `varieties` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_orderitems_origin` FOREIGN KEY (`origin_id`) REFERENCES `prefectures` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_orderitems_millingtype` FOREIGN KEY (`millingtype_id`) REFERENCES `millingtypes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_orderitems_weight` FOREIGN KEY (`weight_id`) REFERENCES `weights` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
