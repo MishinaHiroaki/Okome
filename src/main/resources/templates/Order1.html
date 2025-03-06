@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>注文画面</title>
+	<title>注文画面1</title>
 	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
 </head>
 
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<form action="/checkout" method="post">
+	<form action="/order2" method="post" onsubmit="return validateForm()">
 		<div class="container2">
 			<div class="supplement">2回目以降の方は<strong>ログイン</strong>をお願いします！ ⬇︎初めての方は、以下よりご登録ください⬇︎</div>
 			<div class="section_title">▼ご注文者様の情報を入力して下さい</div>
@@ -62,19 +62,22 @@
 			<div class="row_container">
 				<div class="td1 box_col_1">パスワード：</div>
 				<div class="td2 box_col_2">
-					<input type="password" name="password" style="width:75%;" required><br>
+					<input type="password" id="password" name="password" style="width:75%;" required><br>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">パスワード確認：</div>
 				<div class="td2 box_col_2">
-					<input type="password" name="password" style="width:75%;" required><br>
+					<input type="password" id="confirm_password" name="confirm_password" style="width:75%;"
+						required><br>
+					<p id="error-message"style="color:red;font-size: 20px;"></p>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">郵便番号：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="postal_code" size="8" required><br>
+					<input type="text" name="postal_code" size="8" pattern="\d{3}-?\d{4}" required><br>
+					<p style="font-size: 20px;">記入例:111-1111</p>
 				</div>
 			</div>
 			<div class="row_container">
@@ -86,12 +89,29 @@
 			<div class="row_container">
 				<div class="td1 box_col_1">電話番号：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="phone" size="12" required><br>
+					<input type="text" name="phone" size="12" pattern="\d{2,4}-?\d{2,4}-?\d{4}" required><br>
+					<p style="font-size: 20px;">記入例:090-1111-1111</p>
 				</div>
 			</div>
-				<button class="button order">ご注文内容の確認へ</button>
+			<button class="button order">ご注文内容の確認へ</button>
 		</div>
 	</form>
+
+	<script>
+		function validateForm() {
+			var password = document.getElementById("password").value;
+			var confirmPassword = document.getElementById("confirm_password").value;
+			var errorMessage = document.getElementById("error-message");
+
+			if (password !== confirmPassword) {
+				errorMessage.textContent = "パスワードが一致しません。もう一度入力してください。";
+				return false;
+			}
+
+			errorMessage.textContent = ""; // エラーメッセージを消す
+			return true;
+		}
+	</script>
 	</div>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
