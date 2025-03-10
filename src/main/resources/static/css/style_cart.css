@@ -12,6 +12,19 @@ header {
   padding: 15px;
   text-align: center; }
 
+.section_title {
+  text-align: left;
+  font-size: 20pt;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #666666;
+  padding: 3pt;
+  width: 90%;
+  max-width: 1100px;
+  border: none;
+  padding: 0;
+  margin: auto; }
+
 /* ボタンのスタイル */
 .button {
   background-color: #4CAF50;
@@ -50,7 +63,8 @@ header {
 .container {
   padding: 20px;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  padding-top: 0; }
   .container .titlecart {
     font-size: 50px; }
   .container .product {

@@ -155,7 +155,7 @@ public class ProductController {
 		return "redirect:/cart"; // 削除後、カート画面をリロード
 	}
 
-	@GetMapping("/order") 
+	@GetMapping("/order")
 	public String order(Model model) {
 		List<Cart> carts = cartService.getAllCarts();
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
@@ -164,24 +164,30 @@ public class ProductController {
 		model.addAttribute("totalAmount", totalAmount);
 		return "Order1";
 	}
-	
+
 	@PostMapping("/order2")
 	public String order2(@RequestParam String name,
-						 @RequestParam String email,
-						 @RequestParam String password,
-						 @RequestParam String confirm_password,
-						 @RequestParam String postal_code,
-						 @RequestParam String address,
-						 @RequestParam String phone,
-						 Model model) {
+			@RequestParam String email,
+			@RequestParam String password,
+			@RequestParam String confirm_password,
+			@RequestParam String postal_code,
+			@RequestParam String address,
+			@RequestParam String phone,
+			Model model) {
+
+		List<Cart> carts = cartService.getAllCarts();
+		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
+
+		model.addAttribute("carts", carts);
+		model.addAttribute("totalAmount", totalAmount);
 		
 		model.addAttribute("name", name);
-	    model.addAttribute("email", email);
-	    model.addAttribute("postal_code", postal_code);
-	    model.addAttribute("address", address);
-	    model.addAttribute("phone", phone);
-	    
-		return "Order2"; 
+		model.addAttribute("email", email);
+		model.addAttribute("postal_code", postal_code);
+		model.addAttribute("address", address);
+		model.addAttribute("phone", phone);
+
+		return "Order2";
 	}
 
 }

@@ -11,13 +11,45 @@
 	<header>
 		<h1>Okome販売サイト</h1>
 	</header>
-	<div class="container">
-		<div class="containerA">
-			
+	<div class="containerA">
+		<div class="section_title">▼ご注文の商品を確認してください</div>
+		<div class="product">
+			<!-- 商品がここに動的に表示されます -->
+			<div class="eachprocon" th:each="cart : ${carts}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+				<div class="titlepro"
+					th:text="${'[' + cart.prefecture.prefecture + '産]  ' + cart.name + '  (' + cart.millingtype.millingtype + ')'}">
+				</div>
+				<div class="procon">
+					<div class="procon-image">
+						<img th:src="${cart.imageurl}" alt="商品の画像">
+					</div>
+					<div class="procon-content">
+						<div class="ingredients" th:text="${cart.weight.weight + ':' + cart.price + '円' }">
+						</div>
+						<div class="quant" th:text="${'個数: ' + cart.quantity}"></div>
+						<div class="cnt" th:text="'計: ' + ${cart.totalprice} + '円'"></div>
+					</div>
+				</div>
+			</div>
+			<div class="totalAmount" style="text-decoration: underline" th:text="${'カート合計金額: ' + totalAmount + '円'}">
+			</div>
 		</div>
-		<div class="containerB"></div>
-						
 	</div>
+	<div class="containerC">
+		<div class="section_title">▼ご注文者様の情報を確認してください</div>
+		<div class="data" th:text="'名前: ' + ${name}"></div>
+		<div class="data" th:text="'メールアドレス: ' + ${email}"></div>
+		<div class="data" th:text="'郵便番号: ' + ${postal_code}"></div>
+		<div class="data" th:text="'ご住所: ' + ${address}"></div>
+		<div class="data" th:text="'電話番号: ' + ${phone}"></div>
+	</div>
+	<form action="/order" method="GET" style="text-align: center">
+		<button class="button shop" onclick="history.back()">変更がある場合</button>
+	</form>
+
+	<form action="#" method="GET" style="text-align: center">
+		<button class="button order">注文確定</button>
+	</form>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
 		<button class="button" onclick="location.href='faq.html'">よくある質問</button>

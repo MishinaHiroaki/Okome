@@ -51,4 +51,76 @@ footer {
     .button.shop:hover {
       background-color: darkorange; }
 
+.section_title {
+  text-align: left;
+  font-size: 20pt;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #666666;
+  padding: 3pt;
+  width: 90%;
+  max-width: 1100px;
+  border: none;
+  padding: 0;
+  margin: auto; }
+
+.containerA {
+  padding: 20px 0px;
+  width: 100%;
+  text-align: center;
+  padding-top: 0; }
+  .containerA .product {
+    margin: 30px auto 0px auto;
+    max-width: 600px; }
+    .containerA .product .titlepro {
+      color: #3C6196;
+      font-size: 30px; }
+    .containerA .product .eachprocon {
+      padding: 10px 30px;
+      border: 0.5px solid black;
+      border-radius: 8px;
+      margin-bottom: 30px; }
+      .containerA .product .eachprocon .procon {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        align-items: stretch; }
+        .containerA .product .eachprocon .procon .procon-image {
+          flex: 2; }
+          .containerA .product .eachprocon .procon .procon-image img {
+            width: 100%;
+            /* 親要素の幅と同じにする */
+            height: auto;
+            /* 高さも親と同じにする（オプション） */
+            display: block;
+            padding: 0px; }
+        .containerA .product .eachprocon .procon .procon-content {
+          width: 100%;
+          /* 親要素の幅と同じにする */
+          flex: 5;
+          /* 70% */
+          padding: 0px 20px;
+          /* 親要素の幅を固定 */ }
+          .containerA .product .eachprocon .procon .procon-content .ingredients {
+            font-size: 30px;
+            color: red; }
+          .containerA .product .eachprocon .procon .procon-content .quant {
+            font-size: 30px;
+            color: blue; }
+          .containerA .product .eachprocon .procon .procon-content .cnt {
+            font-size: 40px;
+            color: red; }
+    .containerA .product .totalAmount {
+      font-size: 50px;
+      margin-bottom: 20px; }
+
+.containerC {
+  padding: 20px 0px;
+  text-align: left; }
+  .containerC .data {
+    margin: 30px auto;
+    font-size: 30px;
+    margin-bottom: 1em;
+    max-width: 800px; }
+
 /*# sourceMappingURL=style_order2.css.map */

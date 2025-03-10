@@ -15,6 +15,19 @@ header {
 	text-align: center; //要素内のテキストを 中央揃え にする
 }
 
+.section_title {
+	text-align: left;
+	font-size: 20pt;
+	color: #ffffff;
+	font-weight: bold;
+	background-color: #666666;
+	padding: 3pt;
+	width: 90%;
+	max-width: 1100px;
+	border: none;
+	padding: 0;
+	margin: auto;
+}
 /* ボタンのスタイル */
 .button {
 	background-color: #4CAF50;
@@ -69,6 +82,7 @@ header {
 	padding: 20px;
 	width: 100%;
 	text-align: center;
+	padding-top: 0;
 
 	.titlecart {
 		font-size: 50px;
