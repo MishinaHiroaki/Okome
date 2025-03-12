@@ -101,3 +101,8 @@ http://localhost:8080
 .zshrc ファイルはZshシェルが起動する際に自動的に読み込まれます。
 Zshシェルはこのファイルを探して実行する設定を適用します。
 source ~/.zshrc //新しい設定が即座にシェルに反映されます。
+
+
+【文字列検索】protobufをどのファイルに書かれているか検索したい時
+grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz
+
