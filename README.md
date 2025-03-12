@@ -67,5 +67,23 @@ https://drive.google.com/file/d/1Qp4w-oCLjP1Oa5kP1nTQwPhs-0wDGLSH/view?usp=shari
 ・「注文画面1」ページでご注文者の情報を入力後に(ご注文内容の確認へ)ボタン押下で「注文画面2」へ遷移する
 　*「注文画面2」では、購入希望の商品とご注文者の情報の最終確認をするための画面です。
 
+2025/03/12
+【gitに上げたファイルをダウンロードして、eclipseで開く方法】
+1.プロジェクトを格納するファイルを作成
+/Applications/Eclipse_2024-09.app/Contents/新しいファイル
+2.eclipseにファイルインポート準備
+①ファイル>インポート>Gitからプロジェクト(スマート・インポート)
+②クローンURI>ロケーションURIにCloneのHTTPS(https://github.com/MishinaHiroaki/Okome.git)
+③ローカル宛先のディレクトリーに/Applications/Eclipse_2024-09.app/Contents/新しいファイルを選択
 
+3.プロジェクトのビルド
+ターミナルでプロジェクトのルートディレクトリへ移動します。
+cd /Applications/Eclipse_2024-09.app/Contents/workspace/0310update_clone
+ビルド実行！
+./gradlew build
 
+4.アプリケーションの起動
+java -jar build/libs/0310update_clone-0.0.1-SNAPSHOT.jar
+
+5.動作確認
+http://localhost:8080
