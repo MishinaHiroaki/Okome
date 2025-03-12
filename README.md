@@ -87,3 +87,15 @@ java -jar build/libs/0310update_clone-0.0.1-SNAPSHOT.jar
 
 5.動作確認
 http://localhost:8080
+
+【ターミナルでJava 21（openjdk@21）を使用するために必要な環境変数を設定】
+1. export JAVA_HOME=/opt/homebrew/opt/openjdk@21
+•	JAVA_HOME は、システムが Java 開発キット（JDK）のインストール場所を見つけるための環境変数です。
+
+2. export PATH=$JAVA_HOME/bin:$PATH
+•	PATH は、システムが実行可能ファイルを検索するディレクトリのリストです。
+•	このコマンドは、Java 21 のバイナリディレクトリ ($JAVA_HOME/bin) を PATH に追加します。これにより、java や javac などのコマンドをターミナルで直接実行できるようになります。
+•	$PATH の前に :$JAVA_HOME/bin を追加することで、Java 21 のコマンドが優先的に使用されるように設定されます。
+•: $PATH の部分は、現在の PATH 環境変数に既存のディレクトリパスを保持したまま、新しいディレクトリパスを追加するために使われます。
+
+
