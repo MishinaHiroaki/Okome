@@ -106,3 +106,7 @@ source ~/.zshrc //新しい設定が即座にシェルに反映されます。
 【文字列検索】protobufをどのファイルに書かれているか検索したい時
 grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz
 
+
+2025/03/13
+・Order2.htmlから注文者情報を送信し、コントローラで受け取り、passwordをハッシュ化して、usersテーブルに保存できた。
+0313_update1としてgitに上げた。
