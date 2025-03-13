@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Cart;
+import com.example.demo.entity.User;
 import com.example.demo.repository.CartRepository;
 
 @Service
@@ -31,6 +32,14 @@ public class CartService {
 	
 	public Cart findByProductId(int productId) {
 		return cartRepository.findByProductId(productId);
+	}
+	
+	public List<Cart> getCartItemsByUser(User user) {
+        return cartRepository.findByUserId(user.getId());
+    }
+	
+	public Cart findByProductIdAndSessionId(int productId,String sessionId) {
+		return cartRepository.findByProductIdAndSessionId(productId,sessionId);
 	}
 	
 	

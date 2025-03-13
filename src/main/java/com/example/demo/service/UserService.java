@@ -27,4 +27,8 @@ public class UserService {
 	public User findUserById(Long id) {
 	    return userRepository.findById(id).orElse(null);//引数で受け取ったidのエンティティを返す
 	}
+
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 }

@@ -47,8 +47,15 @@
 		<button class="button shop" onclick="history.back()">変更がある場合</button>
 	</form>
 
-	<form action="#" method="GET" style="text-align: center">
-		<button class="button order">注文確定</button>
+	<form action="/order3" method="POST" style="text-align: center">
+		<input type="hidden" name="name" th:value="${name}">
+		<input type="hidden" name="email" th:value="${email}">
+		<input type="hidden" name="postal_code" th:value="${postal_code}">
+		<input type="hidden" name="address" th:value="${address}">
+		<input type="hidden" name="phone" th:value="${phone}">
+		<input type="hidden" name="password" th:value="${password}">
+		<input type="hidden" name="totalAmount" th:value="${totalAmount}">
+		<button class="button order" style="font-size: 60px; margin-top: 20px;">注文確定</button>
 	</form>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>

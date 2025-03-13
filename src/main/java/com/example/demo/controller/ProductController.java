@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,18 +14,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Cart;
+import com.example.demo.entity.Order;
 import com.example.demo.entity.Product;
+import com.example.demo.entity.User;
 import com.example.demo.service.CartService;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.UserService;
 
 @Controller
 public class ProductController {
 	private final ProductService productService;
 	private final CartService cartService;
+	private final UserService userService;
+	private final OrderService orderService;
 
-	public ProductController(ProductService productService, CartService cartService) {
+	public ProductController(ProductService productService, CartService cartService,UserService userService,OrderService orderService) {
 		this.productService = productService;
 		this.cartService = cartService;
+		this.userService = userService;
+		this.orderService = orderService;
 	}
 
 	@GetMapping("/")
@@ -98,12 +110,15 @@ public class ProductController {
 
 	@PostMapping("/cart")
 	public String showCart(@RequestParam int productId, @RequestParam int quantity,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, HttpSession session) {
 
+		 // セッションID取得 (未ログインユーザー用の識別子)
+	    String sessionId = session.getId();
+	    
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
 
-		Cart existingCart = cartService.findByProductId(productId);
+		Cart existingCart = cartService.findByProductIdAndSessionId(productId, sessionId);
 		if (existingCart != null) {
 			// すでにカートにある場合 → 数量と合計金額を更新
 			existingCart.setQuantity(existingCart.getQuantity() + quantity);
@@ -112,6 +127,7 @@ public class ProductController {
 		} else {
 			// カートに商品を保存
 			Cart cart = new Cart();
+			
 			cart.setProduct(product);
 			cart.setName(product.getName());
 			cart.setImageurl(product.getImageurl());
@@ -122,6 +138,7 @@ public class ProductController {
 			cart.setPrefecture(product.getPrefecture());
 			cart.setVariety(product.getVariety());
 			cart.setWeight(product.getWeight());
+			cart.setSessionId(sessionId);
 			cartService.cartSave(cart);
 		}
 
@@ -169,25 +186,75 @@ public class ProductController {
 	public String order2(@RequestParam String name,
 			@RequestParam String email,
 			@RequestParam String password,
-			@RequestParam String confirm_password,
 			@RequestParam String postal_code,
 			@RequestParam String address,
 			@RequestParam String phone,
 			Model model) {
-
+		
+		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 		List<Cart> carts = cartService.getAllCarts();
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
 
+		String encodeedPassword = bcpe.encode(password);// ハッシュ化
+		
 		model.addAttribute("carts", carts);
 		model.addAttribute("totalAmount", totalAmount);
-		
+
 		model.addAttribute("name", name);
 		model.addAttribute("email", email);
 		model.addAttribute("postal_code", postal_code);
 		model.addAttribute("address", address);
 		model.addAttribute("phone", phone);
+		model.addAttribute("password", encodeedPassword);
 
 		return "Order2";
 	}
+	
+
+	@PostMapping("/order3")
+	public String order3(@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String password,
+			@RequestParam String postal_code,
+			@RequestParam String address,
+			@RequestParam String phone,
+			@RequestParam int totalAmount,
+			HttpSession session) {
+		
+		//1.既存ユーザか新規ユーザかどうか
+		User existingUser = userService.findByEmail(email);
+		User user = null;
+		
+		if (existingUser == null) { //新規ユーザの場合
+			user = new User();
+			user.setName(name);
+			user.setEmail(email);
+			user.setPostal_code(postal_code);
+			user.setAddress(address);
+			user.setPhone(phone);
+			user.setPassword(password);
+			
+			//新規ユーザをデータベースに保存
+			userService.saveUser(user);
+		} else {
+			user = existingUser;
+		}
+		//2.注文を作成
+		Order order = new Order();
+		order.setUser(user);
+		order.setTotalprice(totalAmount);
+		order.setStatus("pending"); 
+		order.setCreatedAt(LocalDateTime.now());  
+	    order.setUpdatedAt(LocalDateTime.now());
+		
+	    //3.注文情報をOrderテーブルに保存
+	    orderService.orderSave(order);
+	    
+	    //4.カート内の商品を注文商品として保存(cartsテーブルのデータをorder_itemsテーブルへ渡す)
+		
+
+		return "Order3";
+	}
+	
 
 }

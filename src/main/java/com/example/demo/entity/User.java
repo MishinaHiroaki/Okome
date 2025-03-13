@@ -20,4 +20,8 @@ public class User {
     private String email;
     private String name;
     private String password;
+    private String postal_code;
+    private String address;
+    private String phone;
+    private String stripe_customer_id;
 }
