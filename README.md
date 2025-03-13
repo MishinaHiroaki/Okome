@@ -109,4 +109,8 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 
 2025/03/13
 ・Order2.htmlから注文者情報を送信し、コントローラで受け取り、passwordをハッシュ化して、usersテーブルに保存できた。
-0313_update1としてgitに上げた。
+//0313_update1としてgitに上げた。
+
+・「注文画面2」の(注文確定)ボタン押下すると、order_itemsテーブルとordersテーブルにデータを挿入して,
+ cartsテーブル内のデータを全て削除できた。
+//0313_update2としてgitに上げた。
