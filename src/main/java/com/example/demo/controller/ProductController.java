@@ -15,9 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Cart;
 import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderItem;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.User;
 import com.example.demo.service.CartService;
+import com.example.demo.service.OrderItemService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
@@ -28,12 +30,16 @@ public class ProductController {
 	private final CartService cartService;
 	private final UserService userService;
 	private final OrderService orderService;
+	private final OrderItemService orderItemService;
+	
+	String sessionId;
 
-	public ProductController(ProductService productService, CartService cartService,UserService userService,OrderService orderService) {
+	public ProductController(ProductService productService, CartService cartService,UserService userService,OrderService orderService,OrderItemService orderItemService) {
 		this.productService = productService;
 		this.cartService = cartService;
 		this.userService = userService;
 		this.orderService = orderService;
+		this.orderItemService = orderItemService;
 	}
 
 	@GetMapping("/")
@@ -113,8 +119,8 @@ public class ProductController {
 			RedirectAttributes redirectAttributes, HttpSession session) {
 
 		 // セッションID取得 (未ログインユーザー用の識別子)
-	    String sessionId = session.getId();
-	    
+	    sessionId = session.getId();
+	    //String sessionId = session.getId();
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
 
@@ -251,8 +257,22 @@ public class ProductController {
 	    orderService.orderSave(order);
 	    
 	    //4.カート内の商品を注文商品として保存(cartsテーブルのデータをorder_itemsテーブルへ渡す)
-		
-
+	    //System.out.println(sessionId);
+	    List<Cart> cartItems = cartService.findBySessionId(sessionId);
+	    
+	    for(Cart cartItem : cartItems) {
+	    	OrderItem orderItem = new OrderItem();
+	    	orderItem.setOrder(order);
+	    	orderItem.setProduct(cartItem.getProduct());
+	    	orderItem.setQuantity(cartItem.getQuantity());
+	    	orderItem.setPrice(cartItem.getPrice());
+	    	orderItem.setTotalprice(cartItem.getTotalprice());
+	    	
+	    	orderItemService.OrderItemSave(orderItem);//cartsテーブルのデータをorder_itemsテーブルへ渡す
+	    	
+	    	cartService.removeItemFromCart(cartItem);//order_itemsテーブルへ渡したcartsテーブルのデータを削除する
+	    } 
+	
 		return "Order3";
 	}
 	

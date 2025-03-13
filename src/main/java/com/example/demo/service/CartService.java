@@ -42,6 +42,12 @@ public class CartService {
 		return cartRepository.findByProductIdAndSessionId(productId,sessionId);
 	}
 	
+	public List<Cart> findBySessionId(String sessionId){
+		return cartRepository.findBySessionId(sessionId);
+	}
 	
 	
+	public void removeItemFromCart(Cart cartItem) {
+	    cartRepository.delete(cartItem);
+	}
 }
