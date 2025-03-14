@@ -116,3 +116,7 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 ・「注文画面2」の(注文確定)ボタン押下すると、order_itemsテーブルとordersテーブルにデータを挿入して,
  cartsテーブル内のデータを全て削除できた。
 //0313_update2としてgitに上げた。
+
+2025/03/14
+・「注文画面3」のレイアウトを整えた
+//0314_update1
