@@ -31,6 +31,8 @@ top.html の検索結果表示を、テーブル構造から整ったレイア�
 
 メモ　cssを更新するコマンド 
  sass --watch src/main/resources/static/sass/style.scss:src/main/resources/static/css/style.css
+ sass --watch src/main/resources/static/sass/style_orderx.scss:src/main/resources/static/css/style_orderx.css
+
 
  gitにupする時のコマンド
  cd /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/
