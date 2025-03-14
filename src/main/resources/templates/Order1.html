@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--Thymeleaf テンプレートエンジンを使用するための宣言-->
 
 <head>
 	<meta charset="UTF-8">
@@ -40,7 +41,7 @@
 			<div class="totalAmount" style="text-decoration: underline" th:text="${'カート合計金額: ' + totalAmount + '円'}">
 			</div>
 			<form action="/cart" method="get">
-				<button class="button shop">ご注文内容の変更</button>
+				<button class="button shop" style="margin-bottom: 30px;">ご注文内容の変更</button>
 			</form>
 		</div>
 	</div>
@@ -59,6 +60,7 @@
 				<div class="td1 box_col_1">メールアドレス：</div>
 				<div class="td2 box_col_2">
 					<input type="email" name="email" style="width:75%;" required><br>
+					<p th:text="${error}" style="color:red;font-size: 20px;"></p>
 				</div>
 			</div>
 			<div class="row_container">

@@ -5,11 +5,27 @@
 	<meta charset="UTF-8">
 	<title>注文画面3</title>
 	<link rel="stylesheet" th:href="@{/css/style_order3.css}">
-	<title>Insert title here</title>
 </head>
 
 <body>
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+	</header>
+	<div class="container">
+		<div class="data" th:utext="${name} + ' 様、この度はご注文いただき、誠にありがとうございました。<br>心より感謝申し上げます。'"></div>
+	</div>
 
+	<form action="/" method="GET" style="text-align: center">
+		<button class="button top">トップページへ戻る</button>
+	</form>
+
+	<footer>
+		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
 </body>
 
 </html>

@@ -31,10 +31,9 @@ public class ProductController {
 	private final UserService userService;
 	private final OrderService orderService;
 	private final OrderItemService orderItemService;
-	
-	String sessionId;
 
-	public ProductController(ProductService productService, CartService cartService,UserService userService,OrderService orderService,OrderItemService orderItemService) {
+	public ProductController(ProductService productService, CartService cartService, UserService userService,
+			OrderService orderService, OrderItemService orderItemService) {
 		this.productService = productService;
 		this.cartService = cartService;
 		this.userService = userService;
@@ -93,10 +92,11 @@ public class ProductController {
 	}
 
 	@PostMapping("/productDetail")
-	public String showProductDetail(@RequestParam int productId, Model model) {
+	public String showProductDetail(@RequestParam int productId, Model model,HttpSession session) {
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
-		Cart cart = cartService.findByProductId(productId);
+		String sessionId = session.getId(); // セッションID取得
+		Cart cart = cartService.findByProductIdAndSessionId(productId, sessionId);
 		int quantity;
 		if (cart != null) {
 			quantity = cart.getQuantity();
@@ -118,9 +118,9 @@ public class ProductController {
 	public String showCart(@RequestParam int productId, @RequestParam int quantity,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 
-		 // セッションID取得 (未ログインユーザー用の識別子)
-	    sessionId = session.getId();
-	    //String sessionId = session.getId();
+		// セッションID取得 (未ログインユーザー用の識別子)
+		String sessionId = session.getId(); // セッションID取得
+		System.out.println("【カート追加時のセッションID】" + sessionId);
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
 
@@ -133,7 +133,7 @@ public class ProductController {
 		} else {
 			// カートに商品を保存
 			Cart cart = new Cart();
-			
+
 			cart.setProduct(product);
 			cart.setName(product.getName());
 			cart.setImageurl(product.getImageurl());
@@ -160,9 +160,10 @@ public class ProductController {
 	}
 
 	@GetMapping("/cart")
-	public String getCart(Model model) {
+	public String getCart(Model model, HttpSession session) {
+		String sessionId = session.getId(); // セッションID取得
 		// カート情報を取得
-		List<Cart> carts = cartService.getAllCarts();
+		List<Cart> carts = cartService.findBySessionId(sessionId);
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
 
 		model.addAttribute("carts", carts);
@@ -179,8 +180,9 @@ public class ProductController {
 	}
 
 	@GetMapping("/order")
-	public String order(Model model) {
-		List<Cart> carts = cartService.getAllCarts();
+	public String order(Model model, HttpSession session) {
+		String sessionId = session.getId(); // セッションID取得
+		List<Cart> carts = cartService.findBySessionId(sessionId);
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
 
 		model.addAttribute("carts", carts);
@@ -195,14 +197,27 @@ public class ProductController {
 			@RequestParam String postal_code,
 			@RequestParam String address,
 			@RequestParam String phone,
-			Model model) {
+			Model model, HttpSession session) {
 		
+		String sessionId = session.getId(); // セッションID取得
+		
+		// メールアドレスが既に登録されているか確認
+		if (userService.findByEmail(email) != null) {
+			List<Cart> carts = cartService.findBySessionId(sessionId);
+			int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
+			model.addAttribute("carts", carts);
+			model.addAttribute("totalAmount", totalAmount);
+			model.addAttribute("error", "このメールアドレスは既に登録されています。ログインしてください。");
+			return "Order1"; 
+		}
+		
+	
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-		List<Cart> carts = cartService.getAllCarts();
+		List<Cart> carts = cartService.findBySessionId(sessionId);
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
 
 		String encodeedPassword = bcpe.encode(password);// ハッシュ化
-		
+
 		model.addAttribute("carts", carts);
 		model.addAttribute("totalAmount", totalAmount);
 
@@ -215,7 +230,6 @@ public class ProductController {
 
 		return "Order2";
 	}
-	
 
 	@PostMapping("/order3")
 	public String order3(@RequestParam String name,
@@ -225,12 +239,16 @@ public class ProductController {
 			@RequestParam String address,
 			@RequestParam String phone,
 			@RequestParam int totalAmount,
+			Model model, 
 			HttpSession session) {
-		
+
+		String sessionId = session.getId(); // 再度セッションIDを取得
+		System.out.println("【注文時のセッションID】" + sessionId);
+
 		//1.既存ユーザか新規ユーザかどうか
 		User existingUser = userService.findByEmail(email);
 		User user = null;
-		
+
 		if (existingUser == null) { //新規ユーザの場合
 			user = new User();
 			user.setName(name);
@@ -239,7 +257,7 @@ public class ProductController {
 			user.setAddress(address);
 			user.setPhone(phone);
 			user.setPassword(password);
-			
+
 			//新規ユーザをデータベースに保存
 			userService.saveUser(user);
 		} else {
@@ -249,32 +267,30 @@ public class ProductController {
 		Order order = new Order();
 		order.setUser(user);
 		order.setTotalprice(totalAmount);
-		order.setStatus("pending"); 
-		order.setCreatedAt(LocalDateTime.now());  
-	    order.setUpdatedAt(LocalDateTime.now());
-		
-	    //3.注文情報をOrderテーブルに保存
-	    orderService.orderSave(order);
-	    
-	    //4.カート内の商品を注文商品として保存(cartsテーブルのデータをorder_itemsテーブルへ渡す)
-	    //System.out.println(sessionId);
-	    List<Cart> cartItems = cartService.findBySessionId(sessionId);
-	    
-	    for(Cart cartItem : cartItems) {
-	    	OrderItem orderItem = new OrderItem();
-	    	orderItem.setOrder(order);
-	    	orderItem.setProduct(cartItem.getProduct());
-	    	orderItem.setQuantity(cartItem.getQuantity());
-	    	orderItem.setPrice(cartItem.getPrice());
-	    	orderItem.setTotalprice(cartItem.getTotalprice());
-	    	
-	    	orderItemService.OrderItemSave(orderItem);//cartsテーブルのデータをorder_itemsテーブルへ渡す
-	    	
-	    	cartService.removeItemFromCart(cartItem);//order_itemsテーブルへ渡したcartsテーブルのデータを削除する
-	    } 
-	
+		order.setStatus("pending");
+		order.setCreatedAt(LocalDateTime.now());
+		order.setUpdatedAt(LocalDateTime.now());
+
+		//3.注文情報をOrderテーブルに保存
+		orderService.orderSave(order);
+
+		//4.カート内の商品を注文商品として保存(cartsテーブルのデータをorder_itemsテーブルへ渡す)
+		List<Cart> cartItems = cartService.findBySessionId(sessionId);
+
+		for (Cart cartItem : cartItems) {
+			OrderItem orderItem = new OrderItem();
+			orderItem.setOrder(order);
+			orderItem.setProduct(cartItem.getProduct());
+			orderItem.setQuantity(cartItem.getQuantity());
+			orderItem.setPrice(cartItem.getPrice());
+			orderItem.setTotalprice(cartItem.getTotalprice());
+
+			orderItemService.OrderItemSave(orderItem);//cartsテーブルのデータをorder_itemsテーブルへ渡す
+
+			cartService.removeItemFromCart(cartItem);//order_itemsテーブルへ渡したcartsテーブルのデータを削除する
+		}
+		model.addAttribute("name", name);
 		return "Order3";
 	}
-	
 
 }
