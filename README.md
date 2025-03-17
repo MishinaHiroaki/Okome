@@ -81,6 +81,11 @@ https://drive.google.com/file/d/1Qp4w-oCLjP1Oa5kP1nTQwPhs-0wDGLSH/view?usp=shari
 3.プロジェクトのビルド
 ターミナルでプロジェクトのルートディレクトリへ移動します。
 cd /Applications/Eclipse_2024-09.app/Contents/workspace/0310update_clone
+
+Gradleがインストールされたら、以下のコマンドで gradle-wrapper.jar を再生成します。
+gradle wrapper
+これで、gradle-wrapper.jar や必要なWrapper設定ファイルが自動で生成されます。
+
 ビルド実行！
 ./gradlew build
 
