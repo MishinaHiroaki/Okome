@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>初めての方へ</title>
+	<!-- 外部CSSファイルのリンク -->
+	<link rel="stylesheet" th:href="@{/css/first_time.css}">
+	<!-- CSSファイルの配置場所 静的リソースは通常、src/main/resources/static フォルダ内に配置する必要があります -->
+
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 20px;
+		}
+
+		.jiko {
+			text-align: center;
+			color: #333;
+		}
+
+		.intro {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #f4f4f4;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.intro p {
+			margin: 10px 0;
+			font-size: 30px;
+		}
+
+		.intro img {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+
+
+</head>
+
+<body>
+	<!-- ヘッダー -->
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+		<form action="/login" method="post">
+			<button class="button">ログイン</button>
+		</form>
+		<form action="/cart" method="get">
+			<button class="button cart">カート確認</button>
+		</form>
+	</header>
+
+	<h1 class="jiko">自己紹介</h1>
+	
+	<div class="intro">
+		<img src="/images/4D6DC27C-E5DF-49D6-9303-17C807400588.webp" alt="自分の写真"> <!-- ここに画像のファイルパスを指定 -->
+		<p><strong>名前：</strong> 三品 博暉</p>
+		<p><strong>出身：</strong> 愛知県</p>
+		<p><strong>趣味：</strong> 散歩</p>
+		<p><strong>好きな食べ物：</strong> お好み焼き</p>
+		<p><strong>目標：</strong> 多くのシステム開発を経験したい</p>
+	</div>
+
+
+
+
+	<!-- フッター -->
+	<footer>
+		<form action="/first_time" method="get">
+			<button type="submit" class="button">初めての方へ</button>
+		</form>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
+
+</body>
+
+</html>

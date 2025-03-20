@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,52 +44,101 @@ public class ProductController {
 	}
 
 	@GetMapping("/")
-	public String topPage(Model model) {
-		List<Product> products = productService.getAllProducts();
-		model.addAttribute("productCount", products.size()); // ヒット件数を追加
-		model.addAttribute("products", products);
+	public String topPage(Model model,
+			HttpServletRequest request,
+			@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+		
+		// 商品リストをページネーションして取得
+	    Page<Product> productPage = productService.getProducts(page, size);
+
+	    model.addAttribute("productCount", productPage.getTotalElements());  // 総件数
+	    model.addAttribute("products", productPage.getContent());           // 商品リスト
+	    model.addAttribute("currentPage", page);                            // 現在のページ
+	    model.addAttribute("totalPages", productPage.getTotalPages());      // 総ページ数
+	    model.addAttribute("pageSize", size);   
 
 		// 初期表示時の検索条件を設定
 		model.addAttribute("millingtype", 0); // 全て
 		model.addAttribute("weight", 0); // 全て
 		model.addAttribute("price_min", 0); // 下限なし
 		model.addAttribute("price_max", 1000000); // 上限なし
+		
+		System.out.println("page=" + page);
+		System.out.println("size=" + size);
+		model.addAttribute("requestURI", request.getRequestURI());
+		System.out.println(request.getRequestURI());
 		return "Top";
 	}
 
-	@PostMapping("/search0")
-	public String search0(@RequestParam int origin, Model model) {
-		List<Product> products = productService.search0WithFilters(origin);
-		model.addAttribute("productCount", products.size()); // ヒット件数を追加
-		model.addAttribute("products", products);
-
+	@GetMapping("/search0")
+	public String search0(@RequestParam int origin,
+			@RequestParam(defaultValue = "0") int page, 
+			@RequestParam(defaultValue = "10") int size,
+			HttpServletRequest request,
+			Model model) {
+		Page<Product> products = productService.search0WithFilters(origin, page, size);
+		// ページネーションされたデータをモデルに追加
+	    model.addAttribute("productCount", products.getTotalElements());  // 総件数
+	    model.addAttribute("products", products.getContent());           // 商品リスト
+	    model.addAttribute("currentPage", page);                            // 現在のページ
+	    model.addAttribute("totalPages", products.getTotalPages());      // 総ページ数
+	    model.addAttribute("pageSize", size);       // 1ページの件数
+	    model.addAttribute("origin", origin);  // ← 産地を渡す
 		model.addAttribute("millingtype", 0); // 全て
+		model.addAttribute("requestURI", request.getRequestURI());
+		System.out.println(request.getRequestURI());
+		
 		return "Top";
 	}
 
-	@PostMapping("/search1")
-	public String search1(@RequestParam int variety, Model model) {
-		List<Product> products = productService.search1WithFilters(variety);
-		model.addAttribute("productCount", products.size()); // ヒット件数を追加
-		model.addAttribute("products", products);
-
+	@GetMapping("/search1")
+	public String search1(@RequestParam int variety, 
+			@RequestParam(defaultValue = "0") int page, 
+			@RequestParam(defaultValue = "10") int size,
+			HttpServletRequest request,
+			Model model) {
+		Page<Product> products = productService.search1WithFilters(variety, page, size);
+		
+		// ページネーションされたデータをモデルに追加
+	    model.addAttribute("productCount", products.getTotalElements());  // 総件数
+	    model.addAttribute("products", products.getContent());           // 商品リスト
+	    model.addAttribute("currentPage", page);                            // 現在のページ
+	    model.addAttribute("totalPages", products.getTotalPages());      // 総ページ数
+	    model.addAttribute("pageSize", size);       // 1ページの件数
+	    model.addAttribute("variety", variety);  // ← 品種を渡す
 		model.addAttribute("millingtype", 0); // 全て
+		model.addAttribute("requestURI", request.getRequestURI());
+		System.out.println(request.getRequestURI());
 		return "Top";
 	}
 
-	@PostMapping("/search2")
-	public String search2(@RequestParam int millingtype, @RequestParam int weight, @RequestParam int price_min,
-			@RequestParam int price_max, Model model) {
-		List<Product> products = productService.search2WithFilters(millingtype, weight, price_min, price_max);
+	@GetMapping("/search2")
+	public String search2(@RequestParam int millingtype, 
+			@RequestParam int weight, 
+			@RequestParam int price_min,
+			@RequestParam int price_max,
+			@RequestParam(defaultValue = "0") int page, 
+			@RequestParam(defaultValue = "10") int size,
+			HttpServletRequest request,
+			Model model) {
+		Page<Product> products = productService.search2WithFilters(millingtype, weight, price_min, price_max, page, size);
 
-		model.addAttribute("productCount", products.size()); // ヒット件数を追加
-		model.addAttribute("products", products);
+		// ページネーションされたデータをモデルに追加
+	    model.addAttribute("productCount", products.getTotalElements());  // 総件数
+	    model.addAttribute("products", products.getContent());           // 商品リスト
+	    model.addAttribute("currentPage", page);                            // 現在のページ
+	    model.addAttribute("totalPages", products.getTotalPages());      // 総ページ数
+	    model.addAttribute("pageSize", size);       // 1ページの件数
+	    model.addAttribute("requestURI", request.getRequestURI());
+	    System.out.println(request.getRequestURI());
 
 		// 検索条件をモデルに追加
 		model.addAttribute("millingtype", millingtype);
 		model.addAttribute("weight", weight);
 		model.addAttribute("price_min", price_min);
 		model.addAttribute("price_max", price_max);
+		
 		return "Top";
 	}
 
@@ -292,5 +343,10 @@ public class ProductController {
 		model.addAttribute("name", name);
 		return "Order3";
 	}
+	
+//	@GetMapping("/first_time")
+//	public String first_time() {
+//		return "first_time";
+//	}
 
 }

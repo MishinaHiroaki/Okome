@@ -178,6 +178,19 @@ h3 {
     .product .pagination span {
       padding: 8px 16px; }
 
+.section_title {
+  text-align: left;
+  font-size: 20pt;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #666666;
+  padding: 3pt;
+  width: 90%;
+  max-width: 1100px;
+  border: none;
+  padding: 0;
+  margin: auto; }
+
 /* フッターのスタイル */
 footer {
   background-color: #333;
@@ -188,4 +201,4 @@ footer {
   width: 100%;
   bottom: 0; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=first_time.css.map */

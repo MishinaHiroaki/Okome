@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
 	<!-- ヘッダー -->
 	<header>
 		<h1>Okome販売サイト</h1>
@@ -31,8 +30,8 @@
 	<div class="section_title">▼以下の2通りの方法で、ご希望のお米を検索してください</div>
 	<!-- メインコンテンツ -->
 	<div class="container">
-		
-		<form action="/search0" method="post">
+
+		<form action="/search0" method="get">
 			<!-- 産地ボタン -->
 			<div class="filter-section">
 				<h3>産地</h3>
@@ -42,7 +41,7 @@
 			</div>
 		</form>
 		<!-- 品種ボタン -->
-		<form action="/search1" method="post">
+		<form action="/search1" method="get">
 			<div class="filter-section">
 				<h3>品種</h3>
 				<button class="button" name="variety" value="1">コシヒカリ</button>
@@ -52,16 +51,19 @@
 		</form>
 
 	</div>
-	
+
 	<div class="search-container">
-		
-		<form action="/search2" method="post">
+
+		<form action="/search2" method="get">
 			<!-- 精米区分 -->
 			<div class="form-group">
 				<label style="font-weight: bold; color:white;">精米区分</label>
-				<label style="color:white;"><input type="radio" name="millingtype" value="0" th:checked="${millingtype == 0}"> 全て</label>
-				<label style="color:white;"><input type="radio" name="millingtype" value="1" th:checked="${millingtype == 1}"> 精米</label>
-				<label style="color:white;"><input type="radio" name="millingtype" value="2" th:checked="${millingtype == 2}"> 玄米</label>
+				<label style="color:white;"><input type="radio" name="millingtype" value="0"
+						th:checked="${millingtype == 0}"> 全て</label>
+				<label style="color:white;"><input type="radio" name="millingtype" value="1"
+						th:checked="${millingtype == 1}"> 精米</label>
+				<label style="color:white;"><input type="radio" name="millingtype" value="2"
+						th:checked="${millingtype == 2}"> 玄米</label>
 			</div>
 
 			<!-- 重量 -->
@@ -111,7 +113,7 @@
 	</div>
 
 	<div class="section_title">▼検索結果はこちら</div>
-	
+
 	<!-- 商品 -->
 	<div class="hitcount">ヒットした件数: <span th:text="${productCount}"></span></div>
 	<div class="product">
@@ -140,11 +142,63 @@
 				</div>
 			</div>
 		</div>
+		<!-- ページネーション -->
+		<div class="pagination">
+			<span id="currentPageValue" th:text="${currentPage}"></span>
+			<span id="pageSizeValue" th:text="${pageSize}"></span>
+
+			<span id="currentPageValue" th:if="${currentPage > 0}">
+				<a th:if="${requestURI == '/'}"
+					th:href="@{/?page={page}&size={size} (page=${currentPage - 1}, size=${pageSize})}">&lt; 前のページ</a>
+
+				<a th:if="${requestURI == '/search0'}"
+					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage - 1}, size=${pageSize})}">&lt;
+					前のページ</a>
+
+				<a th:if="${requestURI =='/search1'}"
+					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage - 1}, size=${pageSize})}">&lt;
+					前のページ</a>
+
+				<a th:if="${requestURI == '/search2'}"
+					th:href="@{search2?millingtype={millingtype}&weight={weight}&price_min={price_min}&price_max={price_max}&page={page}&size={size} 
+			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage - 1}, size=${pageSize})}">&lt;
+					前のページ</a>
+			</span>
+
+
+			<span th:if="${currentPage < totalPages - 1}">
+				<a id="nextPageLink" th:if="${requestURI == '/'}"
+					th:href="@{/?page={page}&size={size} (page=${currentPage + 1}, size=${pageSize})}">次のページ &gt;</a>
+
+				<a id="nextPageLinkSearch0" th:if="${requestURI == '/search0'}"
+					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage + 1}, size=${pageSize})}">次のページ
+					&gt;</a>
+
+				<a id="nextPageLinkSearch1" th:if="${requestURI =='/search1'}"
+					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage + 1}, size=${pageSize})}">次のページ
+					&gt;</a>
+
+				<a id="nextPageLinkSearch2" th:if="${requestURI == '/search2'}"
+					th:href="@{search2?millingtype={millingtype}&weight={weight}&price_min={price_min}&price_max={price_max}&page={page}&size={size} 
+			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage + 1}, size=${pageSize})}">次のページ &gt;</a>
+			</span>
+			<script>
+				window.onload = function () {
+					let currentPage = document.getElementById("currentPageValue")?.innerText;
+					console.log("現在のページ (currentPage):", currentPage);
+				};
+			</script>
+		</div>
 	</div>
+
+
 
 	<!-- フッター -->
 	<footer>
-		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<!--		<form action="/first_time" method="get">-->
+		<!--		    <button type="submit" class="button">初めての方へ</button>-->
+		<!--		</form>-->
+		<button type="submit" class="button">初めての方へ</button>
 		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
 	</footer>
 
