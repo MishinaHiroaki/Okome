@@ -125,3 +125,8 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 2025/03/14
 ・「注文画面3」のレイアウトを整えた
 //0314_update1
+
+2025/03/20
+・ページネーション機能を追加した
+//0320_update1
+
