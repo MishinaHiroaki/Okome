@@ -130,3 +130,6 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 ・ページネーション機能を追加した
 //0320_update1
 
+2025/03/24
+・ページネーションのレイアウトを修正した
+//0324_update1
