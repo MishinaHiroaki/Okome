@@ -222,21 +222,46 @@ h3 {
 
 	.pagination {
 		display: flex;
+		justify-content: center;
+
 		a {
 			padding: 8px 16px;
 			margin: 0 4px;
-			border: 1px solid #ccc;
 			text-decoration: none;
-			color: #000;
+			color: #3C6196;
+			font-size: 35px;
+			border-radius: 50%;
+
 
 			&:hover {
 				background-color: #f0f0f0;
 			}
+
+			.pagination_item {
+				padding: 8px 16px;
+			}
+
 		}
 
-		span {
-			padding: 8px 16px;
+		a.active {
+			font-weight: bold;
+			pointer-events: none;
+			/* クリック無効 */
+			cursor: default;
+			color: #000;
 		}
+
+		a.disabled {
+			pointer-events: none;
+			/* クリック無効 */
+			color: #ccc;
+			/* グレー表示 */
+			cursor: default;
+			/* マウスポインタ変化なし */
+			text-decoration: none;
+		}
+
+
 	}
 }
 

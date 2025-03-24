@@ -1,0 +1,112 @@
+Date : 2025-03-20 23:21:01
+Directory : /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz
+Total : 55 files,  3544 codes, 245 comments, 660 blanks, all 4449 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| SCSS       |          7 |      1,025 |         68 |        201 |      1,294 |
+| CSS        |          7 |        846 |         67 |         63 |        976 |
+| Java       |         22 |        694 |         38 |        223 |        955 |
+| HTML       |          7 |        557 |         30 |         77 |        664 |
+| MS SQL     |          2 |        179 |          5 |         22 |        206 |
+| Markdown   |          2 |        115 |          0 |         40 |        155 |
+| JSON       |          4 |         42 |          0 |          0 |         42 |
+| Batch      |          1 |         41 |         32 |         22 |         95 |
+| Groovy     |          2 |         37 |          2 |          9 |         48 |
+| Properties |          1 |          8 |          3 |          3 |         14 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                 | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                    |         55 |      3,544 |        245 |        660 |      4,449 |
+| . (Files)                                                                                                                            |          5 |        193 |         34 |         71 |        298 |
+| .dbeaver                                                                                                                             |          4 |         42 |          0 |          0 |         42 |
+| src                                                                                                                                  |         46 |      3,309 |        211 |        589 |      4,109 |
+| src/main                                                                                                                             |         45 |      3,300 |        211 |        584 |      4,095 |
+| src/main/java                                                                                                                        |         21 |        685 |         38 |        218 |        941 |
+| src/main/java/com                                                                                                                    |         21 |        685 |         38 |        218 |        941 |
+| src/main/java/com/example                                                                                                            |         21 |        685 |         38 |        218 |        941 |
+| src/main/java/com/example/demo                                                                                                       |         21 |        685 |         38 |        218 |        941 |
+| src/main/java/com/example/demo (Files)                                                                                               |          1 |          9 |          0 |          5 |         14 |
+| src/main/java/com/example/demo/controller                                                                                            |          1 |        269 |         26 |         58 |        353 |
+| src/main/java/com/example/demo/entity                                                                                                |          9 |        223 |          0 |         62 |        285 |
+| src/main/java/com/example/demo/repository                                                                                            |          5 |         42 |          7 |         39 |         88 |
+| src/main/java/com/example/demo/service                                                                                               |          5 |        142 |          5 |         54 |        201 |
+| src/main/resources                                                                                                                   |         24 |      2,615 |        173 |        366 |      3,154 |
+| src/main/resources (Files)                                                                                                           |          3 |        187 |          8 |         25 |        220 |
+| src/main/resources/static                                                                                                            |         14 |      1,871 |        135 |        264 |      2,270 |
+| src/main/resources/static/css                                                                                                        |          7 |        846 |         67 |         63 |        976 |
+| src/main/resources/static/sass                                                                                                       |          7 |      1,025 |         68 |        201 |      1,294 |
+| src/main/resources/templates                                                                                                         |          7 |        557 |         30 |         77 |        664 |
+| src/test                                                                                                                             |          1 |          9 |          0 |          5 |         14 |
+| src/test/java                                                                                                                        |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com                                                                                                                    |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com/example                                                                                                            |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com/example/demo                                                                                                       |          1 |          9 |          0 |          5 |         14 |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                             | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/.dbeaver/credentials-config.json                                   | JSON       |          2 |          0 |          0 |          2 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/.dbeaver/data-sources.json                                         | JSON       |         38 |          0 |          0 |         38 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/.dbeaver/project-metadata.json                                     | JSON       |          1 |          0 |          0 |          1 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/.dbeaver/project-settings.json                                     | JSON       |          1 |          0 |          0 |          1 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/HELP.md                                                            | Markdown   |         19 |          0 |          8 |         27 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/README.md                                                          | Markdown   |         96 |          0 |         32 |        128 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/build.gradle                                                       | Groovy     |         36 |          2 |          8 |         46 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/gradlew.bat                                                        | Batch      |         41 |         32 |         22 |         95 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/settings.gradle                                                    | Groovy     |          1 |          0 |          1 |          2 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/OkomeEcWizApplication.java          | Java       |          9 |          0 |          5 |         14 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/controller/ProductController.java   | Java       |        269 |         26 |         58 |        353 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Cart.java                    | Java       |         43 |          0 |         14 |         57 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Millingtype.java             | Java       |         15 |          0 |          4 |         19 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Order.java                   | Java       |         35 |          0 |         12 |         47 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/OrderItem.java               | Java       |         28 |          0 |          7 |         35 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Prefecture.java              | Java       |         15 |          0 |          4 |         19 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Product.java                 | Java       |         33 |          0 |         10 |         43 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/User.java                    | Java       |         24 |          0 |          3 |         27 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Variety.java                 | Java       |         15 |          0 |          4 |         19 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/entity/Weight.java                  | Java       |         15 |          0 |          4 |         19 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/repository/CartRepository.java      | Java       |         10 |          0 |         11 |         21 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/repository/OrderItemRepository.java | Java       |          5 |          0 |          5 |         10 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/repository/OrderRepository.java     | Java       |          5 |          0 |          5 |         10 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/repository/ProductRepository.java   | Java       |         16 |          6 |         12 |         34 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/repository/UserRepository.java      | Java       |          6 |          1 |          6 |         13 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/service/CartService.java            | Java       |         37 |          0 |         17 |         54 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/service/OrderItemService.java       | Java       |         14 |          0 |          6 |         20 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/service/OrderService.java           | Java       |         14 |          0 |          8 |         22 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/service/ProductService.java         | Java       |         53 |          4 |         13 |         70 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/service/UserService.java            | Java       |         24 |          1 |         10 |         35 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/application.properties                          | Properties |          8 |          3 |          3 |         14 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/data.sql                                        | MS SQL     |         60 |          0 |          1 |         61 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/schema.sql                                      | MS SQL     |        119 |          5 |         21 |        145 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/first_time.css                       | CSS        |        178 |         13 |         14 |        205 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style.css                            | CSS        |        166 |         13 |         13 |        192 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style2.css                           | CSS        |        101 |         11 |          7 |        119 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style_cart.css                       | CSS        |        114 |         10 |          7 |        131 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style_order1.css                     | CSS        |        133 |         10 |          9 |        152 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style_order2.css                     | CSS        |        112 |          7 |          8 |        127 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/style_order3.css                     | CSS        |         42 |          3 |          5 |         50 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/first_time.scss                     | SCSS       |        213 |         14 |         43 |        270 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style.scss                          | SCSS       |        200 |         14 |         43 |        257 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style2.scss                         | SCSS       |        126 |         11 |         27 |        164 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style_cart.scss                     | SCSS       |        140 |         10 |         26 |        176 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style_order1.scss                   | SCSS       |        161 |         10 |         31 |        202 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style_order2.scss                   | SCSS       |        135 |          7 |         24 |        166 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/style_order3.scss                   | SCSS       |         50 |          2 |          7 |         59 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Cart.html                             | HTML       |         62 |          2 |          4 |         68 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Order1.html                           | HTML       |        118 |          1 |          8 |        127 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Order2.html                           | HTML       |         61 |          1 |          5 |         67 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Order3.html                           | HTML       |         26 |          0 |          5 |         31 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/ProductDetail.html                    | HTML       |         64 |          3 |          8 |         75 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Top.html                              | HTML       |        158 |         19 |         30 |        207 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/first_time.html                       | HTML       |         68 |          4 |         17 |         89 |
+| /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/test/java/com/example/demo/OkomeEcWizApplicationTests.java     | Java       |          9 |          0 |          5 |         14 |
+| Total                                                                                                                                |            |      3,544 |        245 |        660 |      4,449 |
++--------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

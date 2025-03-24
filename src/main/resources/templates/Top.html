@@ -144,53 +144,77 @@
 		</div>
 		<!-- ページネーション -->
 		<div class="pagination">
-			<span id="currentPageValue" th:text="${currentPage}"></span>
-			<span id="pageSizeValue" th:text="${pageSize}"></span>
-
-			<span id="currentPageValue" th:if="${currentPage > 0}">
+			<div class="pagination_item">
 				<a th:if="${requestURI == '/'}"
-					th:href="@{/?page={page}&size={size} (page=${currentPage - 1}, size=${pageSize})}">&lt; 前のページ</a>
+					th:href="@{/?page={page}&size={size} (page=${currentPage - 1}, size=${pageSize})}"
+					th:classappend="${currentPage == 0} ? 'disabled'" class="pagination_link">&laquo;
+				</a>
 
 				<a th:if="${requestURI == '/search0'}"
-					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage - 1}, size=${pageSize})}">&lt;
-					前のページ</a>
+					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage - 1}, size=${pageSize})}"
+					th:classappend="${currentPage == 0} ? 'disabled'" class="pagination_link">&laquo;
+				</a>
 
 				<a th:if="${requestURI =='/search1'}"
-					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage - 1}, size=${pageSize})}">&lt;
-					前のページ</a>
+					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage - 1}, size=${pageSize})}"
+					th:classappend="${currentPage == 0} ? 'disabled'" class="pagination_link">&laquo;
+				</a>
 
 				<a th:if="${requestURI == '/search2'}"
 					th:href="@{search2?millingtype={millingtype}&weight={weight}&price_min={price_min}&price_max={price_max}&page={page}&size={size} 
-			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage - 1}, size=${pageSize})}">&lt;
-					前のページ</a>
-			</span>
+			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage - 1}, size=${pageSize})}"
+					th:classappend="${currentPage == 0} ? 'disabled'" class="pagination_link">&laquo;
+				</a>
+			</div>
+
+			<div class="pagination_item">
+				<span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+					<a th:if="${requestURI == '/'}"
+						th:href="@{/?page={page}&size={size} (page=${i}, size=${pageSize})}"
+						th:classappend="${i == currentPage} ? 'active'" class="pagination_link" th:text="${i + 1}">
+					</a>
+					<a th:if="${requestURI == '/search0'}"
+						th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${i}, size=${pageSize})}"
+						th:classappend="${i == currentPage} ? 'active'" class="pagination_link" th:text="${i + 1}">
+					</a>
+					<a th:if="${requestURI == '/search1'}"
+						th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${i}, size=${pageSize})}"
+						th:classappend="${i == currentPage} ? 'active'" class="pagination_link" th:text="${i + 1}">
+					</a>
+					<a th:if="${requestURI == '/search2'}"
+						th:href="@{search2?millingtype={millingtype}&weight={weight}&price_min={price_min}&price_max={price_max}&page={page}&size={size} 
+								           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${i}, size=${pageSize})}"
+						th:classappend="${i == currentPage} ? 'active'" class="pagination_link" th:text="${i + 1}">
+					</a>
+				</span>
+			</div>
 
 
-			<span th:if="${currentPage < totalPages - 1}">
+			<div class="pagination_item">
 				<a id="nextPageLink" th:if="${requestURI == '/'}"
-					th:href="@{/?page={page}&size={size} (page=${currentPage + 1}, size=${pageSize})}">次のページ &gt;</a>
+					th:href="@{/?page={page}&size={size} (page=${currentPage + 1}, size=${pageSize})}"
+					th:classappend="${currentPage == totalPages - 1} ? 'disabled'" class="pagination_link">&raquo;
+				</a>
 
 				<a id="nextPageLinkSearch0" th:if="${requestURI == '/search0'}"
-					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage + 1}, size=${pageSize})}">次のページ
-					&gt;</a>
+					th:href="@{search0?origin={origin}&page={page}&size={size} (origin=${origin}, page=${currentPage + 1}, size=${pageSize})}"
+					th:classappend="${currentPage == totalPages - 1} ? 'disabled'" class="pagination_link">&raquo;
+				</a>
 
 				<a id="nextPageLinkSearch1" th:if="${requestURI =='/search1'}"
-					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage + 1}, size=${pageSize})}">次のページ
-					&gt;</a>
+					th:href="@{search1?variety={variety}&page={page}&size={size} (variety=${variety}, page=${currentPage + 1}, size=${pageSize})}"
+					th:classappend="${currentPage == totalPages - 1} ? 'disabled'" class="pagination_link">&raquo;
+				</a>
 
 				<a id="nextPageLinkSearch2" th:if="${requestURI == '/search2'}"
 					th:href="@{search2?millingtype={millingtype}&weight={weight}&price_min={price_min}&price_max={price_max}&page={page}&size={size} 
-			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage + 1}, size=${pageSize})}">次のページ &gt;</a>
-			</span>
-			<script>
-				window.onload = function () {
-					let currentPage = document.getElementById("currentPageValue")?.innerText;
-					console.log("現在のページ (currentPage):", currentPage);
-				};
-			</script>
+			           (millingtype=${millingtype}, weight=${weight}, price_min=${price_min}, price_max=${price_max}, page=${currentPage + 1}, size=${pageSize})}"
+					th:classappend="${currentPage == totalPages - 1} ? 'disabled'" class="pagination_link">&raquo;</a>
+			</div>
 		</div>
 	</div>
-
+	<!-- th:textで確認 -->
+	<!--	<span th:text="${requestURI}">0</span>-->
 
 
 	<!-- フッター -->

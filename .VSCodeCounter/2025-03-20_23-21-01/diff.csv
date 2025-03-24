@@ -1,0 +1,8 @@
+"filename", "language", "Java", "HTML", "SCSS", "CSS", "Markdown", "comment", "blank", "total"
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/README.md", "Markdown", 0, 0, 0, 0, 3, 0, 2, 5
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/java/com/example/demo/controller/ProductController.java", "Java", 1, 0, 0, 0, 0, 4, 0, 5
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/css/first_time.css", "CSS", 0, 0, 0, 178, 0, 13, 14, 205
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/static/sass/first_time.scss", "SCSS", 0, 0, 213, 0, 0, 14, 43, 270
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/Top.html", "HTML", 0, -4, 0, 0, 0, 3, 7, 6
+"/Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC_Wiz/src/main/resources/templates/first_time.html", "HTML", 0, 68, 0, 0, 0, 4, 17, 89
+"Total", "-", 1, 64, 213, 178, 3, 38, 83, 580

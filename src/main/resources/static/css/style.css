@@ -166,17 +166,33 @@ h3 {
               background-color: #333;
               color: #fff; }
   .product .pagination {
-    display: flex; }
+    display: flex;
+    justify-content: center; }
     .product .pagination a {
       padding: 8px 16px;
       margin: 0 4px;
-      border: 1px solid #ccc;
       text-decoration: none;
-      color: #000; }
+      color: #3C6196;
+      font-size: 35px;
+      border-radius: 50%; }
       .product .pagination a:hover {
         background-color: #f0f0f0; }
-    .product .pagination span {
-      padding: 8px 16px; }
+      .product .pagination a .pagination_item {
+        padding: 8px 16px; }
+    .product .pagination a.active {
+      font-weight: bold;
+      pointer-events: none;
+      /* クリック無効 */
+      cursor: default;
+      color: #000; }
+    .product .pagination a.disabled {
+      pointer-events: none;
+      /* クリック無効 */
+      color: #ccc;
+      /* グレー表示 */
+      cursor: default;
+      /* マウスポインタ変化なし */
+      text-decoration: none; }
 
 /* フッターのスタイル */
 footer {
