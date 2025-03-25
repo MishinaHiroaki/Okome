@@ -137,3 +137,6 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 2025/03/25
 ・郵便番号api機能を実装
 //0325_update1
+
+Thymeleafで${...}の式をHTMLテキストに埋め込む場合、[[${...}]]とする
+例：<p>ログイン状態: [[${session.userName}]]</p>
