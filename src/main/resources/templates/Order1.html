@@ -79,15 +79,16 @@
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">郵便番号：</div>
-				<div class="td2 box_col_2">
-					<input type="text" name="postal_code" size="8" required><br>
-					<p style="font-size: 20px;">記入例:1234567</p>
+				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
+					<input type="text" name="postal_code" id="zip_code" size="8" required>
+					<button type="button" id="zipSearchBtn" class="button" style="white-space: nowrap;">検索</button>
+					<p style="font-size: 30px;">記入例:1001001</p>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">ご住所：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="address" style="width:95%;" required><br>
+					<input type="text" name="address" id="address" style="width:95%;" required><br>
 				</div>
 			</div>
 			<div class="row_container">
@@ -100,28 +101,12 @@
 			<button class="button order">ご注文内容の確認へ</button>
 		</div>
 	</form>
-
-	<script>
-		function validateForm() {
-			var password = document.getElementById("password").value;
-			var confirmPassword = document.getElementById("confirm_password").value;
-			var errorMessage = document.getElementById("error-message");
-
-			if (password !== confirmPassword) {
-				errorMessage.textContent = "パスワードが一致しません。もう一度入力してください。";
-				return false;
-			}
-
-			errorMessage.textContent = ""; // エラーメッセージを消す
-			return true;
-		}
-	</script>
 	</div>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
 		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
 	</footer>
-
+	<script th:src="@{/js/validateForm.js}"></script>
 </body>
 
 </html>
