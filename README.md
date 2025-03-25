@@ -133,3 +133,7 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 2025/03/24
 ・ページネーションのレイアウトを修正した
 //0324_update1
+
+2025/03/25
+・郵便番号api機能を実装
+//0325_update1
