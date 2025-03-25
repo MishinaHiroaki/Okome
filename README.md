@@ -147,3 +147,7 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 
 【data.sqlのinsert文について】
 select * from products;を実行して、insert文として、exportすれば、その出力結果をdata.sqlにコピペすればいい
+
+2025/03/25
+・ログイン機能,実装途中
+//0325_update2
