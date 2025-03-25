@@ -144,3 +144,6 @@ grep -r "protobuf" /Applications/Eclipse_2024-09.app/Contents/workspace/Okome_EC
 
 ◉属性値に使う場合はth:text(表示以外の用途には th: 系が適しています。)
 例：<p th:text="${session.userName}"></p>
+
+【data.sqlのinsert文について】
+select * from products;を実行して、insert文として、exportすれば、その出力結果をdata.sqlにコピペすればいい
