@@ -43,9 +43,11 @@
 		<div class="data" th:text="'ご住所: ' + ${address}"></div>
 		<div class="data" th:text="'電話番号: ' + ${phone}"></div>
 	</div>
-	<form action="/order" method="GET" style="text-align: center">
+
+	<div style="text-align: center">
 		<button class="button shop" onclick="history.back()">変更がある場合</button>
-	</form>
+	</div>
+
 
 	<form action="/order3" method="POST" style="text-align: center">
 		<input type="hidden" name="name" th:value="${name}">

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>ログイン画面</title>
+	<link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body>
+	<header>
+		<h1>Okome販売サイト</h1>
+	</header>
+	<form action="/loginA" method="POST">
+		<div class="container">
+			<div class="section_title"> ▼登録したログイン情報を入力して下さい</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">メールアドレス：</div>
+				<div class="td2 box_col_2">
+					<input type="email" name="email" style="width:75%;" required><br>
+					<p th:text="${error}" style="color:red;font-size: 20px;"></p>
+				</div>
+			</div>
+			<div class="row_container">
+				<div class="td1 box_col_1">パスワード：</div>
+				<div class="td2 box_col_2">
+					<input type="password" id="password" name="password" style="width:75%;" required><br>
+				</div>
+			</div>
+			<div class="twobtn">
+				<button class="button login">ログイン</button>
+			</div>
+		</div>
+	</form>
+	<form action="/" style="text-align: center" method="GET">
+		<button class="button shop" onclick="history.back()">topページへ戻る</button>
+	</form>
+
+</body>
+
+</html>

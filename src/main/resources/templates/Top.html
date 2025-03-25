@@ -18,15 +18,19 @@
 		<form action="/" method="GET">
 			<button class="button">トップページ</button>
 		</form>
-		<form action="/login" method="post">
+		<form action="/login" method="get">
 			<button class="button">ログイン</button>
 		</form>
 		<form action="/cart" method="get">
 			<button class="button cart">カート確認</button>
 		</form>
+		<form action="/logout" method="get">
+			<button class="button">ログアウト</button>
+		</form>
 
 	</header>
-
+		<h2 th:text="${session.userName != null} ? ${session.userName + 'さん、ようこそ！'} :'ゲストさんようこそ！'"></h2>	
+	<p>ログイン状態: [[${session.userName}]]</p>
 	<div class="section_title">▼以下の2通りの方法で、ご希望のお米を検索してください</div>
 	<!-- メインコンテンツ -->
 	<div class="container">
@@ -169,8 +173,7 @@
 
 			<div class="pagination_item">
 				<span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-					<a th:if="${requestURI == '/'}"
-						th:href="@{/?page={page}&size={size} (page=${i}, size=${pageSize})}"
+					<a th:if="${requestURI == '/'}" th:href="@{/?page={page}&size={size} (page=${i}, size=${pageSize})}"
 						th:classappend="${i == currentPage} ? 'active'" class="pagination_link" th:text="${i + 1}">
 					</a>
 					<a th:if="${requestURI == '/search0'}"
