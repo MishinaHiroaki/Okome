@@ -11,6 +11,13 @@ header {
   color: white;
   padding: 15px;
   text-align: center; }
+  header .right-buttons {
+    display: flex;
+    /* 横並びにする */
+    justify-content: flex-end;
+    /* 右寄せにする */
+    margin-top: 10px;
+    /* 上に少し余白（任意） */ }
 
 /* ボタンのスタイル */
 .button {

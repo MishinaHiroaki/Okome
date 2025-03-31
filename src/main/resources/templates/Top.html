@@ -18,19 +18,21 @@
 		<form action="/" method="GET">
 			<button class="button">トップページ</button>
 		</form>
-		<form action="/login" method="get">
-			<button class="button">ログイン</button>
-		</form>
-		<form action="/cart" method="get">
-			<button class="button cart">カート確認</button>
-		</form>
-		<form action="/logout" method="get">
-			<button class="button">ログアウト</button>
-		</form>
-
+		<div class="right-buttons">
+			<form action="/login" method="get">
+				<button class="button">ログイン</button>
+			</form>
+			<form action="/cart" method="get">
+				<button class="button cart">カート確認</button>
+			</form>
+			<form action="/logout" method="get">
+				<button class="button">ログアウト</button>
+			</form>
+		</div>
 	</header>
-		<h2 th:text="${session.userName != null} ? ${session.userName + 'さん、ようこそ！'} :'ゲストさんようこそ！'"></h2>	
-	<p>ログイン状態: [[${session.userName}]]</p>
+	<h2 class="userlogin"
+		th:text="${session.userName != null} ? ${session.userName + '様、ログインありがとうございます！'} :'ゲスト様、いつもありがとうございます！'"></h2>
+	<!--	<p>ログイン状態: [[${session.userName}]]</p>-->
 	<div class="section_title">▼以下の2通りの方法で、ご希望のお米を検索してください</div>
 	<!-- メインコンテンツ -->
 	<div class="container">

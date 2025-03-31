@@ -13,6 +13,17 @@ header {
 	color: white;
 	padding: 15px;
 	text-align: center; //要素内のテキストを 中央揃え にする
+
+	.right-buttons {
+		display: flex;
+		/* 横並びにする */
+		justify-content: flex-end;
+		/* 右寄せにする */
+		gap: 10px;
+		/* ボタン間のスペース */
+		margin-top: 10px;
+		/* 上に少し余白（任意） */
+	}
 }
 
 .section_title {
@@ -28,6 +39,7 @@ header {
 	padding: 0;
 	margin: auto;
 }
+
 /* ボタンのスタイル */
 .button {
 	background-color: #4CAF50;

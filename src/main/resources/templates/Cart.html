@@ -13,56 +13,58 @@
 		<form action="/" method="GET">
 			<button class="button">トップページ</button>
 		</form>
-		<form action="/login" method="get">
-			<button class="button">ログイン</button>
-		</form>
-		<form action="/cart" method="get">
-			<button class="button cart">カート確認</button>
-		</form>
+		<div class="right-buttons">
+			<form action="/login" method="get">
+				<button class="button">ログイン</button>
+			</form>
+			<form action="/cart" method="get">
+				<button class="button cart">カート確認</button>
+			</form>
+
+		</div>
 	</header>
 	<div class="container">
 		<div class="section_title">▼カートに入れた商品</div>
-			<div class="product">
-				<!-- 商品がここに動的に表示されます -->
-				<div class="eachprocon" th:each="cart : ${carts}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
-					<div class="titlepro"
-						th:text="${'[' + cart.prefecture.prefecture + '産]  ' + cart.name + '  (' + cart.millingtype.millingtype + ')'}">
-					</div>
-					<div class="procon">
-						<div class="procon-image">
-							<img th:src="${cart.imageurl}" alt="商品の画像">
-						</div>
-						<div class="procon-content">
-							<div class="ingredients" th:text="${cart.weight.weight + ':' + cart.price + '円' }">
-							</div>
-							<div class="quant" th:text="${'個数: ' + cart.quantity}"></div>
-							<div class="cnt" th:text="'計: ' + ${cart.totalprice} + '円'"></div>
-						</div>
-						<form action="/cartdelete" method="POST">
-							<input type="hidden" name="cartId" th:value="${cart.id}">
-							<button class="delbtn" type="submit">削除</button>
-						</form>
-					</div>
+		<div class="product">
+			<!-- 商品がここに動的に表示されます -->
+			<div class="eachprocon" th:each="cart : ${carts}"> <!--th:each は Thymeleaf のループ処理（foreach のようなもの）-->
+				<div class="titlepro"
+					th:text="${'[' + cart.prefecture.prefecture + '産]  ' + cart.name + '  (' + cart.millingtype.millingtype + ')'}">
 				</div>
-				<div class="totalAmount" style="text-decoration: underline"
-					th:text="${'カート合計金額: ' + totalAmount + '円'}">
+				<div class="procon">
+					<div class="procon-image">
+						<img th:src="${cart.imageurl}" alt="商品の画像">
+					</div>
+					<div class="procon-content">
+						<div class="ingredients" th:text="${cart.weight.weight + ':' + cart.price + '円' }">
+						</div>
+						<div class="quant" th:text="${'個数: ' + cart.quantity}"></div>
+						<div class="cnt" th:text="'計: ' + ${cart.totalprice} + '円'"></div>
+					</div>
+					<form action="/cartdelete" method="POST">
+						<input type="hidden" name="cartId" th:value="${cart.id}">
+						<button class="delbtn" type="submit">削除</button>
+					</form>
 				</div>
 			</div>
-			<div class="twobtn">
-				<form action="/" method="GET">
-					<button class="button shop">ショッピングを続ける</button>
-				</form>
-
-				<form action="/order" method="GET">
-					<button class="button order" th:disabled="${totalAmount == 0}">注文手続きへ</button>
-				</form>
+			<div class="totalAmount" style="text-decoration: underline" th:text="${'カート合計金額: ' + totalAmount + '円'}">
 			</div>
 		</div>
-		<!-- フッター -->
-		<footer>
-			<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
-			<button class="button" onclick="location.href='faq.html'">よくある質問</button>
-		</footer>
+		<div class="twobtn">
+			<form action="/" method="GET">
+				<button class="button shop">ショッピングを続ける</button>
+			</form>
+
+			<form action="/order" method="GET">
+				<button class="button order" th:disabled="${totalAmount == 0}">注文手続きへ</button>
+			</form>
+		</div>
+	</div>
+	<!-- フッター -->
+	<footer>
+		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
+		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+	</footer>
 </body>
 
 </html>

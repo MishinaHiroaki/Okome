@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+header {
+	background-color: #333;
+	color: white;
+	padding: 15px;
+	text-align: center;
+}
+
+.container {
+	margin: auto;
+
+	.section_title {
+		margin: auto;
+		color: #ffffff;
+		font-weight: bold;
+		background-color: #666666;
+		max-width: 1100px;
+		font-size: 30px;
+	}
+
+	.row_container {
+		width: 100%;
+		display: flex;
+		max-width: 1100px;
+		margin: auto;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		font-size: 30px;
+
+		.td1 {
+			border: 1pt solid #cccccc;
+			background-color: #ffffff;
+			padding: 15pt;
+		}
+
+		.box_col_1 {
+			width: 25%;
+			text-align: left;
+		}
+
+		.td2 {
+			border: 1pt solid #cccccc;
+			background-color: #ffffff;
+			padding: 15pt;
+
+		}
+
+		.box_col_2 {
+			width: 75%;
+			text-align: left;
+
+			input {
+				height: 30px;
+				font-size: 35px;
+				padding: 10px;
+			}
+		}
+
+
+	}
+}
+
+.btn {
+text-align: center;
+	.button {
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 10px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block; //横並びできて、幅高さ調整できる
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: #45a049;
+		}
+
+		&.login {
+			background-color: white;
+			font-size: 30px;
+			color: #333;
+			border: 1px solid #333;
+			border-radius: 5px;
+
+			&:hover {
+				background-color: #333;
+				color: white;
+			}
+		}
+	}
+}

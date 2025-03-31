@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org"> <!--Thymeleaf テンプレートエンジンを使用するための宣言-->
 
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン画面</title>
-	<link rel="stylesheet" href="/css/login.css">
+	<link rel="stylesheet" th:href="@{/css/login.css}">
 
 </head>
 
@@ -26,15 +27,18 @@
 				<div class="td1 box_col_1">パスワード：</div>
 				<div class="td2 box_col_2">
 					<input type="password" id="password" name="password" style="width:75%;" required><br>
+					<p th:text="${error2}" style="color:red;font-size: 20px;"></p>
 				</div>
 			</div>
-			<div class="twobtn">
-				<button class="button login">ログイン</button>
+			<div class="btn">
+			<button class="button login">ログイン</button>
 			</div>
+			
 		</div>
 	</form>
-	<form action="/" style="text-align: center" method="GET">
-		<button class="button shop" onclick="history.back()">topページへ戻る</button>
+
+	<form action="/" method="GET" class="btn">
+		<button class="button return">topページへ戻る</button>
 	</form>
 
 </body>

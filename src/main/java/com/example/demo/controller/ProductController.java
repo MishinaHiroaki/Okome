@@ -45,7 +45,7 @@ public class ProductController {
 
 	@GetMapping("/login")
 	public String Login() {
-		return "Login";
+		return "login";
 	}
 
 	@GetMapping("/logout")
@@ -63,8 +63,15 @@ public class ProductController {
 		User user = userService.findByEmail(email);
 		if (user == null) {
 			model.addAttribute("error","そのメールアドレスは登録されていません");
-			return "Login";
+			return "login";
 		}
+		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
+		
+		if (!bcpe.matches(password,user.getPassword())) {
+			model.addAttribute("error2","パスワードが間違っています");
+			return "login";
+		}
+		
 		session.setAttribute("userName", user.getName());
 		return "redirect:/";
 	}

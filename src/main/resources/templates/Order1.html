@@ -14,9 +14,11 @@
 		<form action="/" method="GET">
 			<button class="button">トップページ</button>
 		</form>
-		<form action="/login" method="get">
-			<button class="button">ログイン</button>
-		</form>
+		<div class="right-buttons">
+			<form action="/login" method="get">
+				<button class="button">ログイン</button>
+			</form>
+		</div>
 	</header>
 	<div class="container">
 		<div class="section_title">▼ご注文の商品を確認してください</div>
@@ -93,9 +95,9 @@
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">電話番号：</div>
-				<div class="td2 box_col_2">
+				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
 					<input type="text" name="phone" size="12" required><br>
-					<p style="font-size: 20px;">記入例:09012345678</p>
+					<p style="font-size: 30px;">記入例:09012345678</p>
 				</div>
 			</div>
 			<button class="button order">ご注文内容の確認へ</button>
