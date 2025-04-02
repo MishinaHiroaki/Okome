@@ -157,6 +157,7 @@ select * from products;を実行して、insert文として、exportすれば、
 //0331_update1
 
 2025/04/02
+以下を実装した
 cartsテーブルのuserIdとsessionIdの両方を管理する
 ●ゲストユーザー(初回)
 -> userIdがないため、sessionIdでカートを管理する
