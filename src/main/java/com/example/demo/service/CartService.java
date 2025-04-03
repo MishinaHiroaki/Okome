@@ -38,6 +38,10 @@ public class CartService {
         return cartRepository.findByUserId(user.getId());
     }
 	
+	public List<Cart> findAllByProductId(int productId){
+		return cartRepository.findAllByProductId(productId);
+	}
+	
 	public Cart findByProductIdAndSessionId(int productId,String sessionId) {
 		return cartRepository.findByProductIdAndSessionId(productId,sessionId);
 	}

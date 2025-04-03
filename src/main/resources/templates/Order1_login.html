@@ -4,8 +4,17 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>注文画面1</title>
+	<title>注文画面1(ログイン済)</title>
 	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
+	<style>
+			/* readonly の input を水色にする */
+			input[readonly] {
+				background-color: #e0f7ff;
+				border: 1px solid #00aaff;
+				color: #333;
+				cursor: not-allowed;
+			}
+		</style>
 </head>
 
 <body>
@@ -14,11 +23,6 @@
 		<form action="/" method="GET">
 			<button class="button">トップページ</button>
 		</form>
-		<div class="right-buttons">
-			<form action="/login" method="get">
-				<button class="button">ログイン</button>
-			</form>
-		</div>
 	</header>
 	<div class="container">
 		<div class="section_title">▼ご注文の商品を確認してください</div>
@@ -48,41 +52,26 @@
 		</div>
 	</div>
 
-	<form action="/order2" method="post" onsubmit="return validateForm()">
+	<form action="/order2_login" method="post" onsubmit="return validateForm()">
 		<div class="container2">
-			<div class="supplement">2回目以降の方は<strong>ログイン</strong>をお願いします！ ⬇︎初めての方は、以下よりご登録ください⬇︎</div>
 			<div class="section_title">▼ご注文者様の情報を入力して下さい</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">名前：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="name" size="20" required><br>
+					<input type="text" name="name" size="20" required th:value="${loginUser != null ? loginUser.name :''}" readonly><br>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">メールアドレス：</div>
 				<div class="td2 box_col_2">
-					<input type="email" name="email" style="width:75%;" required><br>
+					<input type="email" name="email" style="width:75%;" required th:value="${loginUser != null ? loginUser.email :''}" readonly><br>
 					<p th:text="${error}" style="color:red;font-size: 20px;"></p>
-				</div>
-			</div>
-			<div class="row_container">
-				<div class="td1 box_col_1">パスワード：</div>
-				<div class="td2 box_col_2">
-					<input type="password" id="password" name="password" style="width:75%;" required><br>
-				</div>
-			</div>
-			<div class="row_container">
-				<div class="td1 box_col_1">パスワード確認：</div>
-				<div class="td2 box_col_2">
-					<input type="password" id="confirm_password" name="confirm_password" style="width:75%;"
-						required><br>
-					<p id="error-message" style="color:red;font-size: 20px;"></p>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">郵便番号：</div>
 				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
-					<input type="text" name="postal_code" id="zip_code" size="8" required>
+					<input type="text" name="postal_code" id="zip_code" size="8" required th:value="${loginUser != null ? loginUser.postal_code :''}">
 					<button type="button" id="zipSearchBtn" class="button" style="white-space: nowrap;">検索</button>
 					<p style="font-size: 30px;">記入例:1001001</p>
 				</div>
@@ -90,13 +79,13 @@
 			<div class="row_container">
 				<div class="td1 box_col_1">ご住所：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="address" id="address" style="width:95%;" required><br>
+					<input type="text" name="address" id="address" style="width:95%;" required th:value="${loginUser != null ? loginUser.address :''}"><br>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">電話番号：</div>
 				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
-					<input type="text" name="phone" size="12" required><br>
+					<input type="text" name="phone" size="12" required th:value="${loginUser != null ? loginUser.phone :''}"><br>
 					<p style="font-size: 30px;">記入例:09012345678</p>
 				</div>
 			</div>

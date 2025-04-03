@@ -62,17 +62,28 @@ public class ProductController {
 			Model model) {
 		User user = userService.findByEmail(email);
 		if (user == null) {
-			model.addAttribute("error","そのメールアドレスは登録されていません");
+			model.addAttribute("error", "そのメールアドレスは登録されていません");
 			return "login";
 		}
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-		
-		if (!bcpe.matches(password,user.getPassword())) {
-			model.addAttribute("error2","パスワードが間違っています");
+
+		if (!bcpe.matches(password, user.getPassword())) {
+			model.addAttribute("error2", "パスワードが間違っています");
 			return "login";
 		}
-		
+
 		session.setAttribute("userName", user.getName());
+		session.setAttribute("loginUser",user);
+		
+		//ログイン前にカートに入れていた商品をこのユーザに紐付ける
+		String sessionId = session.getId();
+		List<Cart> guestCarts = cartService.findBySessionId(sessionId);
+		
+		for (Cart cart : guestCarts) {
+			cart.setUser(user);
+			cartService.cartSave(cart);
+		}
+		
 		return "redirect:/";
 	}
 
@@ -180,15 +191,10 @@ public class ProductController {
 	public String showProductDetail(@RequestParam int productId, Model model, HttpSession session) {
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
-		String sessionId = session.getId(); // セッションID取得
-		Cart cart = cartService.findByProductIdAndSessionId(productId, sessionId);
-		int quantity;
-		if (cart != null) {
-			quantity = cart.getQuantity();
-		} else {
-			// cart が null の場合の処理（例えば 0 をセットするなど）
-			quantity = 0;
-		}
+		
+		List<Cart> cartz = cartService.findAllByProductId(productId);
+
+		int quantity = cartz.stream().mapToInt(Cart::getQuantity).sum();
 
 		int zaiko = product.getStock_quantity() - quantity;
 
@@ -216,6 +222,8 @@ public class ProductController {
 			existingCart.setTotalprice(existingCart.getPrice() * existingCart.getQuantity());
 			cartService.cartSave(existingCart);
 		} else {
+			User user = (User) session.getAttribute("loginUser");
+
 			// カートに商品を保存
 			Cart cart = new Cart();
 
@@ -230,6 +238,10 @@ public class ProductController {
 			cart.setVariety(product.getVariety());
 			cart.setWeight(product.getWeight());
 			cart.setSessionId(sessionId);
+			if (user != null) {
+				cart.setUser(user);				
+			}
+			
 			cartService.cartSave(cart);
 		}
 
@@ -272,6 +284,14 @@ public class ProductController {
 
 		model.addAttribute("carts", carts);
 		model.addAttribute("totalAmount", totalAmount);
+		User user = (User) session.getAttribute("loginUser");
+		model.addAttribute("loginUser",user);
+		
+		if(user != null) {
+			return "Order1_login";
+		}
+		
+		
 		return "Order1";
 	}
 
@@ -314,6 +334,34 @@ public class ProductController {
 
 		return "Order2";
 	}
+	
+	@PostMapping("/order2_login")
+	public String order2_login(@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String postal_code,
+			@RequestParam String address,
+			@RequestParam String phone,
+			Model model, HttpSession session) {
+
+		String sessionId = session.getId(); // セッションID取得
+
+		List<Cart> carts = cartService.findBySessionId(sessionId);
+		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
+
+		
+
+		model.addAttribute("carts", carts);
+		model.addAttribute("totalAmount", totalAmount);
+
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		model.addAttribute("postal_code", postal_code);
+		model.addAttribute("address", address);
+		model.addAttribute("phone", phone);
+
+		return "Order2";
+	}
+
 
 	@PostMapping("/order3")
 	public String order3(@RequestParam String name,
@@ -346,6 +394,10 @@ public class ProductController {
 			userService.saveUser(user);
 		} else {
 			user = existingUser;
+			user.setPostal_code(postal_code);
+			user.setAddress(address);
+			user.setPhone(phone);
+			userService.saveUser(user);
 		}
 		//2.注文を作成
 		Order order = new Order();
