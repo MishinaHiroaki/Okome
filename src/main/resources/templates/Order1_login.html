@@ -5,16 +5,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>注文画面1(ログイン済)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
 	<style>
-			/* readonly の input を水色にする */
-			input[readonly] {
-				background-color: #e0f7ff;
-				border: 1px solid #00aaff;
-				color: #333;
-				cursor: not-allowed;
+		/* readonly の input を水色にする */
+		input[readonly] {
+			background-color: #e0f7ff;
+			border: 1px solid #00aaff;
+			color: #333;
+			cursor: not-allowed;
+		}
+		#card-element {
+			  background: white;
+			  padding: 10px;
+			  border: 1px solid #ccc;
+			  border-radius: 4px;
+			  margin-top: 10px;
+			  width: 100%; /* inputタグと揃える */
+			  min-height: 40px; /* 最低でもこれぐらいの高さを確保 */
+			  box-sizing: border-box;
+			  font-size: 18px;
 			}
-		</style>
+	</style>
 </head>
 
 <body>
@@ -52,26 +64,32 @@
 		</div>
 	</div>
 
-	<form action="/order2_login" method="post" onsubmit="return validateForm()">
+	<!-- Stripe.js を読み込む -->
+	<script src="https://js.stripe.com/v3/"></script>
+
+	<form id="order-form" action="/order2_login" method="post" onsubmit="return validateForm()">
 		<div class="container2">
 			<div class="section_title">▼ご注文者様の情報を入力して下さい</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">名前：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="name" size="20" required th:value="${loginUser != null ? loginUser.name :''}" readonly><br>
+					<input type="text" name="name" size="20" required
+						th:value="${loginUser != null ? loginUser.name :''}" readonly><br>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">メールアドレス：</div>
 				<div class="td2 box_col_2">
-					<input type="email" name="email" style="width:75%;" required th:value="${loginUser != null ? loginUser.email :''}" readonly><br>
+					<input type="email" name="email" style="width:75%;" required
+						th:value="${loginUser != null ? loginUser.email :''}" readonly><br>
 					<p th:text="${error}" style="color:red;font-size: 20px;"></p>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">郵便番号：</div>
 				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
-					<input type="text" name="postal_code" id="zip_code" size="8" required th:value="${loginUser != null ? loginUser.postal_code :''}">
+					<input type="text" name="postal_code" id="zip_code" size="8" required
+						th:value="${loginUser != null ? loginUser.postal_code :''}">
 					<button type="button" id="zipSearchBtn" class="button" style="white-space: nowrap;">検索</button>
 					<p style="font-size: 30px;">記入例:1001001</p>
 				</div>
@@ -79,20 +97,62 @@
 			<div class="row_container">
 				<div class="td1 box_col_1">ご住所：</div>
 				<div class="td2 box_col_2">
-					<input type="text" name="address" id="address" style="width:95%;" required th:value="${loginUser != null ? loginUser.address :''}"><br>
+					<input type="text" name="address" id="address" style="width:95%;" required
+						th:value="${loginUser != null ? loginUser.address :''}"><br>
 				</div>
 			</div>
 			<div class="row_container">
 				<div class="td1 box_col_1">電話番号：</div>
 				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
-					<input type="text" name="phone" size="12" required th:value="${loginUser != null ? loginUser.phone :''}"><br>
+					<input type="text" name="phone" size="12" required
+						th:value="${loginUser != null ? loginUser.phone :''}"><br>
 					<p style="font-size: 30px;">記入例:09012345678</p>
 				</div>
 			</div>
+			<div class="row_container">
+				<!-- Stripeが作るカード番号入力欄 -->
+				<div class="td1 box_col_1">カード情報：</div>
+				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
+					<div id="card-element"><!-- Stripeがここにカード入力フォームを作る --></div>
+				</div>
+			</div>
+			<!-- ここにStripeから受け取ったトークンをセットする -->
+			<input type="hidden" name="stripeToken" id="stripeToken">
 			<button class="button order">ご注文内容の確認へ</button>
 		</div>
 	</form>
 	</div>
+	<!-- Stripe用のJS -->
+	<script>
+		window.onload = function () {
+			// ① Stripeオブジェクト作成
+			const stripe = Stripe('pk_test_51RA6im4J81u2OPKpidsBWbNg9VeF5dfB2UspAj8bvshkQCxc1sK02Aya8rF0v9emFyhBmwH8YUmeXxTY0Oj6DJW700Ns7oTkpF');
+			const style = {
+				base: {
+					fontSize: '30px', /* ★ここでカード番号のフォントサイズを設定できる！ */
+				}
+			};
+
+			const elements = stripe.elements();
+			const card = elements.create('card', {style: style}); // ← スタイルを渡している
+			card.mount('#card-element');
+
+			// ② フォーム送信時にトークンを取得して送信
+			const form = document.getElementById('order-form');
+			form.addEventListener('submit', function (event) {
+				event.preventDefault();
+
+				stripe.createToken(card).then(function (result) {
+					if (result.error) {
+						alert(result.error.message);
+					} else {
+						document.getElementById('stripeToken').value = result.token.id;
+						form.submit();
+					}
+				});
+			});
+		}
+	</script>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
 		<button class="button" onclick="location.href='faq.html'">よくある質問</button>

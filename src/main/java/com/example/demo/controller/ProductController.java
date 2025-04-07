@@ -25,6 +25,10 @@ import com.example.demo.service.OrderItemService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
+import com.stripe.param.ChargeCreateParams;
+
 
 @Controller
 public class ProductController {
@@ -302,10 +306,11 @@ public class ProductController {
 			@RequestParam String postal_code,
 			@RequestParam String address,
 			@RequestParam String phone,
+			@RequestParam String stripeToken,
 			Model model, HttpSession session) {
 
 		String sessionId = session.getId(); // セッションID取得
-
+		
 		// メールアドレスが既に登録されているか確認
 		if (userService.findByEmail(email) != null) {
 			List<Cart> carts = cartService.findBySessionId(sessionId);
@@ -331,6 +336,7 @@ public class ProductController {
 		model.addAttribute("address", address);
 		model.addAttribute("phone", phone);
 		model.addAttribute("password", encodeedPassword);
+		model.addAttribute("stripeToken", stripeToken);
 
 		return "Order2";
 	}
@@ -341,6 +347,7 @@ public class ProductController {
 			@RequestParam String postal_code,
 			@RequestParam String address,
 			@RequestParam String phone,
+			@RequestParam String stripeToken,
 			Model model, HttpSession session) {
 
 		String sessionId = session.getId(); // セッションID取得
@@ -358,6 +365,7 @@ public class ProductController {
 		model.addAttribute("postal_code", postal_code);
 		model.addAttribute("address", address);
 		model.addAttribute("phone", phone);
+		model.addAttribute("stripeToken", stripeToken);
 
 		return "Order2";
 	}
@@ -371,12 +379,35 @@ public class ProductController {
 			@RequestParam String address,
 			@RequestParam String phone,
 			@RequestParam int totalAmount,
+			@RequestParam String stripeToken,
 			Model model,
 			HttpSession session) {
 
 		String sessionId = session.getId(); // 再度セッションIDを取得
 		System.out.println("【注文時のセッションID】" + sessionId);
 
+		try {
+	        // ---  ここで決済を行う ---
+	        Stripe.apiKey = "sk_test_51RA6im4J81u2OPKp09MTg4lzxyHzdZyF0qtXOaU5t8Ht1YFV7VpXWVpVmwYR7tWSFnpe070QobJq01pJyy8YUo0400PbbhrkDG"; // ←秘密鍵を設定（絶対に公開しないやつ）
+
+	        ChargeCreateParams params = ChargeCreateParams.builder()
+	                .setAmount((long) totalAmount) // 金額
+	                .setCurrency("jpy")             // 通貨
+	                .setDescription("Okome購入代金")
+	                .setSource(stripeToken)         // フォームで受け取ったトークン
+	                .build();
+
+	        Charge charge = Charge.create(params); // Stripeに送信
+	        System.out.println("決済成功！ID: " + charge.getId());
+	        // --- 決済成功したら以下の処理を進める ---
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("error", "決済に失敗しました。もう一度お試しください。");
+	        return "Order2"; // 決済失敗したら戻る
+	    }
+		
+		
 		//1.既存ユーザか新規ユーザかどうか
 		User existingUser = userService.findByEmail(email);
 		User user = null;

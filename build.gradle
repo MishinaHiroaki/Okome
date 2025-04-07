@@ -38,6 +38,9 @@ dependencies {
     implementation 'org.springframework.security:spring-security-crypto'
     //追加
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // Stripeの依存関係
+	implementation 'com.stripe:stripe-java:24.10.0'
 }
 
 tasks.named('test') {

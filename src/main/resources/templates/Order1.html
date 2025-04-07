@@ -4,8 +4,23 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>注文画面1</title>
 	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
+	
+	<style>
+	#card-element {
+	  background: white;
+	  padding: 10px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  margin-top: 10px;
+	  width: 100%; /* inputタグと揃える */
+	  min-height: 40px; /* 最低でもこれぐらいの高さを確保 */
+	  box-sizing: border-box;
+	  font-size: 18px;
+	}
+	</style>
 </head>
 
 <body>
@@ -47,8 +62,10 @@
 			</form>
 		</div>
 	</div>
+	<!-- Stripe.js を読み込む -->
+	<script src="https://js.stripe.com/v3/"></script>
 
-	<form action="/order2" method="post" onsubmit="return validateForm()">
+	<form id="order-form" action="/order2" method="post" onsubmit="return validateForm()">
 		<div class="container2">
 			<div class="supplement">2回目以降の方は<strong>ログイン</strong>をお願いします！ ⬇︎初めての方は、以下よりご登録ください⬇︎</div>
 			<div class="section_title">▼ご注文者様の情報を入力して下さい</div>
@@ -100,10 +117,54 @@
 					<p style="font-size: 30px;">記入例:09012345678</p>
 				</div>
 			</div>
+			<div class="row_container">
+				<!-- Stripeが作るカード番号入力欄 -->
+				<div class="td1 box_col_1">カード情報：</div>
+				<div class="td2 box_col_2" style="display: flex; align-items: center; gap: 8px;">
+					<div id="card-element"><!-- Stripeがここにカード入力フォームを作る --></div>
+				</div>
+			</div>
+			<!-- ここにStripeから受け取ったトークンをセットする -->
+			<input type="hidden" name="stripeToken" id="stripeToken">
 			<button class="button order">ご注文内容の確認へ</button>
 		</div>
+
+
+
 	</form>
 	</div>
+
+	<!-- Stripe用のJS -->
+	<script>
+		window.onload = function () {
+			// ① Stripeオブジェクト作成
+			const stripe = Stripe('pk_test_51RA6im4J81u2OPKpidsBWbNg9VeF5dfB2UspAj8bvshkQCxc1sK02Aya8rF0v9emFyhBmwH8YUmeXxTY0Oj6DJW700Ns7oTkpF');
+			const style = {
+			  base: {
+			    fontSize: '30px', /* ★ここでカード番号のフォントサイズを設定できる！ */
+			    }
+			};
+
+			const elements = stripe.elements();
+			const card = elements.create('card', { style: style }); // ← スタイルを渡している
+			card.mount('#card-element');
+
+			// ② フォーム送信時にトークンを取得して送信
+			const form = document.getElementById('order-form');
+			form.addEventListener('submit', function (event) {
+				event.preventDefault();
+
+				stripe.createToken(card).then(function (result) {
+					if (result.error) {
+						alert(result.error.message);
+					} else {
+						document.getElementById('stripeToken').value = result.token.id;
+						form.submit();
+					}
+				});
+			});
+		}
+	</script>
 	<footer>
 		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
 		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
@@ -111,12 +172,9 @@
 	<script th:src="@{/js/validateForm.js}"></script>
 </body>
 <script th:inline="javascript">
-	let userName = /*[[${loginUser != null}]]*/ false
-		? '[[${loginUser.name}]]'
-		: 'ゲスト';
-	console.log("ログインユーザ名：", userName);
+	let userName = /*[[${loginUser != null ? loginUser.name : 'ゲスト'}]]*/
+		console.log("ログインユーザ名：", userName);
 </script>
-
 
 
 
