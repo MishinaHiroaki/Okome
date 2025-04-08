@@ -128,7 +128,7 @@ public class ProductController {
 		Page<Product> products = productService.search0WithFilters(origin, page, size);
 		// ページネーションされたデータをモデルに追加
 		model.addAttribute("productCount", products.getTotalElements()); // 総件数
-		model.addAttribute("products", products.getContent()); // 商品リスト
+		model.addAttribute("products", products.getContent()); // 商品リスト  今のページの10件のこと
 		model.addAttribute("currentPage", page); // 現在のページ
 		model.addAttribute("totalPages", products.getTotalPages()); // 総ページ数
 		model.addAttribute("pageSize", size); // 1ページの件数
@@ -385,7 +385,8 @@ public class ProductController {
 
 		String sessionId = session.getId(); // 再度セッションIDを取得
 		System.out.println("【注文時のセッションID】" + sessionId);
-
+		
+		Charge charge = null;
 		try {
 	        // ---  ここで決済を行う ---
 	        Stripe.apiKey = "sk_test_51RA6im4J81u2OPKp09MTg4lzxyHzdZyF0qtXOaU5t8Ht1YFV7VpXWVpVmwYR7tWSFnpe070QobJq01pJyy8YUo0400PbbhrkDG"; // ←秘密鍵を設定（絶対に公開しないやつ）
@@ -397,7 +398,7 @@ public class ProductController {
 	                .setSource(stripeToken)         // フォームで受け取ったトークン
 	                .build();
 
-	        Charge charge = Charge.create(params); // Stripeに送信
+	        charge = Charge.create(params); // Stripeに送信
 	        System.out.println("決済成功！ID: " + charge.getId());
 	        // --- 決済成功したら以下の処理を進める ---
 
@@ -435,6 +436,7 @@ public class ProductController {
 		order.setUser(user);
 		order.setTotalprice(totalAmount);
 		order.setStatus("pending");
+		order.setStripe_session_id(charge.getId());
 		order.setCreatedAt(LocalDateTime.now());
 		order.setUpdatedAt(LocalDateTime.now());
 
@@ -459,10 +461,4 @@ public class ProductController {
 		model.addAttribute("name", name);
 		return "Order3";
 	}
-
-	//	@GetMapping("/first_time")
-	//	public String first_time() {
-	//		return "first_time";
-	//	}
-
 }
