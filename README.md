@@ -175,6 +175,8 @@ select * from products;を実行して、insert文として、exportすれば、
 2025/04/08
 決済システムと統合した　//0408_update1
 
+stripe_session_idをDBに保存した //0408_update2
+
 
 
 
