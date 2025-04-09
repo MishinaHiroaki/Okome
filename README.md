@@ -177,8 +177,50 @@ select * from products;を実行して、insert文として、exportすれば、
 
 stripe_session_idをDBに保存した //0408_update2
 
+【linuxサーバーにデプロイする手順】
+1.Desktopへ移動し以下を実行すると、Okomeフォルダが作成される
+git clone https://github.com/MishinaHiroaki/Okome.git
 
+2.ビルドを実行(build/libsにjarファイルが作成される、ソースコード(.javaファイル)を実行できる形(jarファイル)に変更する作業をビルドという
+gradle build
 
+3.ビルドが成功すると、bulid/libs/にjarファイルが作成される
+
+4.scpコマンドでjarファイルをサーバにアップロードする (secure copyのこと、自分のPCとサーバーの間でファイルコピー)
+scp bulid/libs/xxxx-SNAPSHOT.jar root@サーバのIPアドレス:/root
+例：scp build/libs/Okome-0.0.1-SNAPSHOT.jar root@160.251.206.176:/root/
+scp [送りたいファイルの場所] [送り先サーバー]:[送り先のパス]
+
+[送り先サーバー](ユーザ名とIP)->root@160.251.206.176
+
+5.ssh root@サーバのIPアドレス　でサーバにログインする　　　サーバのIPアドレスのrootにsshアクセスするってこと
+
+6.パッケージを最新に更新する
+yum update -y
+
+7.mysqlをインストール
+yum install -y mysql-server
+
+8.mysqlが自動で立ち上がるように設定する
+systemctl start mysqld //今すぐMySQLを起動する
+systemctl enable mysqld //サーバ起動時にMySQLを自動起動する
+
+9.mysqlにログインする
+mysql -u root
+
+10.ログイン後、パスワードを設定する
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';　
+//ALTER USERはユーザ情報を変更する　//'root'@'localhost'　mysqlの中のrootユーザにlocalhost（127.0.0.1）からアクセスするって意味
+//IDENTIFIED BY 'password' パスワードをpasswordに設定する
+
+FLUSH PRIVILEGES;　//新しいパスワード情報を即座に反映
+EXIT;
+
+11.mysql -u root -p  でパスワードを打ってログインできる
+
+12.firewallでポートの開閉ステータスを確認する
+firewall-cmd --list-ports
+8080/tcpと表示されなければ閉じている
 
 
 
