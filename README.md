@@ -238,5 +238,6 @@ root 537684 0.9 44.0 2338736 200164 pts/0 Sl+ 14:46 0:21 java -jar Okome_EC_Wiz-
 が表示されていればspringboot起動してる
 
 
-
+2025/04/09
+linuxサーバにデプロイしたが、動かなかった。Login.html ->login.html と修正した
 
