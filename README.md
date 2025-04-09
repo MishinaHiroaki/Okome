@@ -222,6 +222,21 @@ EXIT;
 firewall-cmd --list-ports
 8080/tcpと表示されなければ閉じている
 
+13
+firewall-cmd --permanent --add-port=8080/tcp //8080番ポートをずっと開ける設定を追加
+firewall-cmd --reload　//ファイアウォール設定を即反映
+
+14
+java -jar Okome_EC_Wiz-0.0.1-SNAPSHOT.jar //springboot起動
+
+15 ブラウザで表示
+http://160.251.206.176:8080/
+
+＊ps aux　で動いているアプリが表示
+ps aux | grep javaで
+root 537684 0.9 44.0 2338736 200164 pts/0 Sl+ 14:46 0:21 java -jar Okome_EC_Wiz-0.0.1-SNAPSHOT.jar
+が表示されていればspringboot起動してる
+
 
 
 
