@@ -218,11 +218,16 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<footer>
-	
-		<button type="submit" class="button">初めての方へ</button>
-		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+		<div class="firsttime_question">
+			<form action="/firsttime" method="get">
+				<button type="submit" class="button">初めての方へ</button>
+			</form>
+			<form action="/question" method="get">
+				<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+			</form>
+		</div>
 	</footer>
 
 </body>

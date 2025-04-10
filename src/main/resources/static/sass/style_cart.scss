@@ -185,4 +185,17 @@ footer {
 	position: fixed;
 	width: 100%;
 	bottom: 0;
+
+	.firsttime_question {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		/* ボタン同士の隙間 */
+	}
+
+	.button {
+		padding: 10px 20px;
+		font-size: 16px;
+		cursor: pointer;
+	}
 }

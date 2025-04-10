@@ -7,19 +7,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>注文画面1</title>
 	<link rel="stylesheet" th:href="@{/css/style_order1.css}">
-	
+
 	<style>
-	#card-element {
-	  background: white;
-	  padding: 10px;
-	  border: 1px solid #ccc;
-	  border-radius: 4px;
-	  margin-top: 10px;
-	  width: 100%; /* inputタグと揃える */
-	  min-height: 40px; /* 最低でもこれぐらいの高さを確保 */
-	  box-sizing: border-box;
-	  font-size: 18px;
-	}
+		#card-element {
+			background: white;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			margin-top: 10px;
+			width: 100%;
+			/* inputタグと揃える */
+			min-height: 40px;
+			/* 最低でもこれぐらいの高さを確保 */
+			box-sizing: border-box;
+			font-size: 18px;
+		}
 	</style>
 </head>
 
@@ -140,13 +142,13 @@
 			// ① Stripeオブジェクト作成
 			const stripe = Stripe('pk_test_51RA6im4J81u2OPKpidsBWbNg9VeF5dfB2UspAj8bvshkQCxc1sK02Aya8rF0v9emFyhBmwH8YUmeXxTY0Oj6DJW700Ns7oTkpF');
 			const style = {
-			  base: {
-			    fontSize: '30px', /* ★ここでカード番号のフォントサイズを設定できる！ */
-			    }
+				base: {
+					fontSize: '30px', /* ★ここでカード番号のフォントサイズを設定できる！ */
+				}
 			};
 
 			const elements = stripe.elements();
-			const card = elements.create('card', { style: style }); // ← スタイルを渡している
+			const card = elements.create('card', {style: style}); // ← スタイルを渡している
 			card.mount('#card-element');
 
 			// ② フォーム送信時にトークンを取得して送信
@@ -166,8 +168,14 @@
 		}
 	</script>
 	<footer>
-		<button class="button" onclick="location.href='first_time.html'">初めての方へ</button>
-		<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+		<div class="firsttime_question">
+			<form action="/firsttime" method="get">
+				<button type="submit" class="button">初めての方へ</button>
+			</form>
+			<form action="/question" method="get">
+				<button class="button" onclick="location.href='faq.html'">よくある質問</button>
+			</form>
+		</div>
 	</footer>
 	<script th:src="@{/js/validateForm.js}"></script>
 </body>

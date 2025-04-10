@@ -461,4 +461,12 @@ public class ProductController {
 		model.addAttribute("name", name);
 		return "Order3";
 	}
+	@GetMapping("/firsttime")
+	public String firsttime() {
+		return "first_time";
+	}
+	@GetMapping("/question")
+	public String question() {
+		return "question";
+	}
 }
