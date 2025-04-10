@@ -244,3 +244,5 @@ linuxサーバにデプロイしたが、動かなかった。Login.html ->login
 2025/04/10
 「初めての方へ」「よくある質問」ページを追加した //0410_update1
 
+jarファイルの中身を確認する、loginと名前があるものを検索している
+jar tf build/libs/Okome_EC_Wiz-0.0.1-SNAPSHOT.jar | grep -i login
