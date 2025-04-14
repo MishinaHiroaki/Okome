@@ -254,3 +254,7 @@ jar tf build/libs/Okome_EC_Wiz-0.0.1-SNAPSHOT.jar | grep -i login
 ・eachで対象がnullだとエラーになる
 th:blockを使ってif文を先に実行させてnullでないことを確認してからeachする！
 コントローラ側でデータがnullの場合は、空リストを渡してnullにならないように対策する
+
+【2つのファイルを比較】
+VSコードでコマンドパレット(cmd+sft+p)でCompare Active file  with Savedを選択で比較できる
+【】
