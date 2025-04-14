@@ -246,3 +246,10 @@ linuxサーバにデプロイしたが、動かなかった。Login.html ->login
 
 jarファイルの中身を確認する、loginと名前があるものを検索している
 jar tf build/libs/Okome_EC_Wiz-0.0.1-SNAPSHOT.jar | grep -i login
+
+
+2025/04/15
+【Thymeleafでの注意点】
+eachとifが同じタグにある場合、eachが先に実行される
+eachで対象がnullだとエラーになる
+th:blockを使ってif文を先に実行させてnullでないことを確認してからeachする！
