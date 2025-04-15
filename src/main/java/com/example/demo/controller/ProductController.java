@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +29,6 @@ import com.example.demo.service.UserService;
 import com.stripe.Stripe;
 import com.stripe.model.Charge;
 import com.stripe.param.ChargeCreateParams;
-
 
 @Controller
 public class ProductController {
@@ -77,17 +77,17 @@ public class ProductController {
 		}
 
 		session.setAttribute("userName", user.getName());
-		session.setAttribute("loginUser",user);
-		
+		session.setAttribute("loginUser", user);
+
 		//ログイン前にカートに入れていた商品をこのユーザに紐付ける
 		String sessionId = session.getId();
 		List<Cart> guestCarts = cartService.findBySessionId(sessionId);
-		
+
 		for (Cart cart : guestCarts) {
 			cart.setUser(user);
 			cartService.cartSave(cart);
 		}
-		
+
 		return "redirect:/";
 	}
 
@@ -195,7 +195,7 @@ public class ProductController {
 	public String showProductDetail(@RequestParam int productId, Model model, HttpSession session) {
 		// 商品情報を取得
 		Product product = productService.getProductById(productId);
-		
+
 		List<Cart> cartz = cartService.findAllByProductId(productId);
 
 		int quantity = cartz.stream().mapToInt(Cart::getQuantity).sum();
@@ -243,9 +243,9 @@ public class ProductController {
 			cart.setWeight(product.getWeight());
 			cart.setSessionId(sessionId);
 			if (user != null) {
-				cart.setUser(user);				
+				cart.setUser(user);
 			}
-			
+
 			cartService.cartSave(cart);
 		}
 
@@ -289,13 +289,13 @@ public class ProductController {
 		model.addAttribute("carts", carts);
 		model.addAttribute("totalAmount", totalAmount);
 		User user = (User) session.getAttribute("loginUser");
-		model.addAttribute("loginUser",user);
-		
-		if(user != null) {
+		model.addAttribute("loginUser", user);
+
+		if (user != null) {
+
 			return "Order1_login";
 		}
-		
-		
+
 		return "Order1";
 	}
 
@@ -310,7 +310,7 @@ public class ProductController {
 			Model model, HttpSession session) {
 
 		String sessionId = session.getId(); // セッションID取得
-		
+
 		// メールアドレスが既に登録されているか確認
 		if (userService.findByEmail(email) != null) {
 			List<Cart> carts = cartService.findBySessionId(sessionId);
@@ -340,7 +340,7 @@ public class ProductController {
 
 		return "Order2";
 	}
-	
+
 	@PostMapping("/order2_login")
 	public String order2_login(@RequestParam String name,
 			@RequestParam String email,
@@ -355,8 +355,6 @@ public class ProductController {
 		List<Cart> carts = cartService.findBySessionId(sessionId);
 		int totalAmount = carts.stream().mapToInt(Cart::getTotalprice).sum();
 
-		
-
 		model.addAttribute("carts", carts);
 		model.addAttribute("totalAmount", totalAmount);
 
@@ -369,7 +367,6 @@ public class ProductController {
 
 		return "Order2";
 	}
-
 
 	@PostMapping("/order3")
 	public String order3(@RequestParam String name,
@@ -385,30 +382,29 @@ public class ProductController {
 
 		String sessionId = session.getId(); // 再度セッションIDを取得
 		System.out.println("【注文時のセッションID】" + sessionId);
-		
+
 		Charge charge = null;
 		try {
-	        // ---  ここで決済を行う ---
-	        Stripe.apiKey = "sk_test_51RA6im4J81u2OPKp09MTg4lzxyHzdZyF0qtXOaU5t8Ht1YFV7VpXWVpVmwYR7tWSFnpe070QobJq01pJyy8YUo0400PbbhrkDG"; // ←秘密鍵を設定（絶対に公開しないやつ）
+			// ---  ここで決済を行う ---
+			Stripe.apiKey = "sk_test_51RA6im4J81u2OPKp09MTg4lzxyHzdZyF0qtXOaU5t8Ht1YFV7VpXWVpVmwYR7tWSFnpe070QobJq01pJyy8YUo0400PbbhrkDG"; // ←秘密鍵を設定（絶対に公開しないやつ）
 
-	        ChargeCreateParams params = ChargeCreateParams.builder()
-	                .setAmount((long) totalAmount) // 金額
-	                .setCurrency("jpy")             // 通貨
-	                .setDescription("Okome購入代金")
-	                .setSource(stripeToken)         // フォームで受け取ったトークン
-	                .build();
+			ChargeCreateParams params = ChargeCreateParams.builder()
+					.setAmount((long) totalAmount) // 金額
+					.setCurrency("jpy") // 通貨
+					.setDescription("Okome購入代金")
+					.setSource(stripeToken) // フォームで受け取ったトークン
+					.build();
 
-	        charge = Charge.create(params); // Stripeに送信
-	        System.out.println("決済成功！ID: " + charge.getId());
-	        // --- 決済成功したら以下の処理を進める ---
+			charge = Charge.create(params); // Stripeに送信
+			System.out.println("決済成功！ID: " + charge.getId());
+			// --- 決済成功したら以下の処理を進める ---
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        model.addAttribute("error", "決済に失敗しました。もう一度お試しください。");
-	        return "Order2"; // 決済失敗したら戻る
-	    }
-		
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("error", "決済に失敗しました。もう一度お試しください。");
+			return "Order2"; // 決済失敗したら戻る
+		}
+
 		//1.既存ユーザか新規ユーザかどうか
 		User existingUser = userService.findByEmail(email);
 		User user = null;
@@ -461,12 +457,27 @@ public class ProductController {
 		model.addAttribute("name", name);
 		return "Order3";
 	}
+
 	@GetMapping("/firsttime")
 	public String firsttime() {
 		return "first_time";
 	}
+
 	@GetMapping("/question")
 	public String question() {
 		return "question";
+	}
+
+	@GetMapping("/history")
+	public String history(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("loginUser");
+		List<Order> orderdatas =  orderService.findByUser(user);
+		
+		 // ★ null 対策を追加
+	    if (orderdatas == null) {
+	        orderdatas = new ArrayList<>();
+	    }
+		model.addAttribute("orderdatas", orderdatas);
+		return "history";
 	}
 }

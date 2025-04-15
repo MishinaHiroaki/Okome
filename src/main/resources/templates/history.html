@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>購入履歴ページ</title>
+	<link rel="stylesheet" th:href="@{/css/history.css}">
+</head>
+
+<body>
+	<header>
+		<h1>Okome販売サイト</h1>
+		<form action="/" method="GET">
+			<button class="button">トップページ</button>
+		</form>
+	</header>
+	<div class="container">
+		<h2 class="userlogin" th:text="${session.userName + '様の購入履歴'}"></h2>
+
+		<table class="history-table" border="1">
+			<thead>
+				<tr>
+					<th>購入日</th>
+					<th>注文番号</th>
+					<th>商品名</th>
+					<th>精米区分</th>
+					<th>重さ</th>
+					<th>購入数</th>
+					<th>単価</th>
+					<th>合計金額</th>
+					<th>ステータス</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="orderdata : ${orderdatas}">
+					<tr>
+						<td th:text="${#temporals.format(orderdata.createdAt, 'yyyy-MM-dd')}"></td>
+						<td th:text="${orderdata.id}"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td th:text="${orderdata.totalprice}"></td>
+						<td th:text="${orderdata.status}"></td>
+					</tr>
+
+					<th:block th:if="${orderdata.orderItems != null}">
+						<tr th:each="orderitem : ${orderdata.orderItems}">
+							<td></td>
+							<td></td>
+							<td th:text="${orderitem.product.name}"></td>
+							<td th:text="${orderitem.product.millingtype.millingtype}"></td>
+							<td th:text="${orderitem.product.weight.weight}"></td>
+							<td th:text="${orderitem.quantity}"></td>
+							<td th:text="${orderitem.price}"></td>
+							<td th:text="${orderitem.totalprice}"></td>
+							<td></td>
+						</tr>
+					</th:block>
+				</th:block>
+			</tbody>
+		</table>	
+	</div>
+</body>
+
+</html>

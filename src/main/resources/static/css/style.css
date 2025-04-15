@@ -76,6 +76,10 @@ h3 {
     background-color: orange; }
     .button.cart:hover {
       background-color: darkorange; }
+  .button.history {
+    background-color: #e74c3c; }
+    .button.history:hover {
+      background-color: #c0392b; }
   .button:hover {
     background-color: #45a049; }
 

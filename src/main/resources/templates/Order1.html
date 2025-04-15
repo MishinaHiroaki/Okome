@@ -32,9 +32,11 @@
 			<button class="button">トップページ</button>
 		</form>
 		<div class="right-buttons">
-			<form action="/login" method="get">
-				<button class="button">ログイン</button>
-			</form>
+			<th:block th:if="${session.userName == null}">
+				<form action="/login" method="get">
+					<button class="button">ログイン</button>
+				</form>
+			</th:block>
 		</div>
 	</header>
 	<div class="container">

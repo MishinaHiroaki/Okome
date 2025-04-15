@@ -130,6 +130,8 @@ CREATE TABLE `orderitems` (
   `quantity` INT NOT NULL,
   `price` INT NOT NULL,
   `totalprice` INT NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   
   PRIMARY KEY (`id`),
   --  インデックスを有効化

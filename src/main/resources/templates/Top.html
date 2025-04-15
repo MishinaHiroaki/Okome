@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
-<html xmlns:th="http://www.thymeleaf.org"> <!--Thymeleaf テンプレートエンジンを使用するための宣言-->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"> <!--Thymeleaf テンプレートエンジンを使用するための宣言-->
 
 <head>
 	<meta charset="UTF-8">
@@ -19,15 +18,24 @@
 			<button class="button">トップページ</button>
 		</form>
 		<div class="right-buttons">
-			<form action="/login" method="get">
-				<button class="button">ログイン</button>
-			</form>
+			<th:block th:if="${session.userName != null}">
+				<form action="/history" method="get">
+					<button class="button history">購入履歴</button>
+				</form>
+			</th:block>
+			<th:block th:if="${session.userName == null}">
+				<form action="/login" method="get">
+					<button class="button">ログイン</button>
+				</form>
+			</th:block>
 			<form action="/cart" method="get">
 				<button class="button cart">カート確認</button>
 			</form>
-			<form action="/logout" method="get">
-				<button class="button">ログアウト</button>
-			</form>
+			<th:block th:if="${session.userName != null}">
+				<form action="/logout" method="get">
+					<button class="button">ログアウト</button>
+				</form>
+			</th:block>
 		</div>
 	</header>
 	<h2 class="userlogin"
