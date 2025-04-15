@@ -257,4 +257,9 @@ th:blockを使ってif文を先に実行させてnullでないことを確認し
 
 【2つのファイルを比較】
 VSコードでコマンドパレット(cmd+sft+p)でCompare Active file  with Savedを選択で比較できる
+
+----
+購入履歴ページを作成した//0415_update1
+【】
+
 【】
