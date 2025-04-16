@@ -267,10 +267,10 @@ VSコードでコマンドパレット(cmd+sft+p)でCompare Active file  with Sa
 ・VPC内にパブリックサブネットを作成
 ・パブリックIPを自動割り当てを有効にする
 ・EC2インスタンスはこのサブネット内に配置
-●3.インターネットゲートウエイ(IGW)
+●3.インターネットゲートウエイ(IGW) 
 ・IGWを作成
 ・作成したVPCにアタッチする
-●4.ルートテーブル(VPC->外)
+●4.ルートテーブル(VPC->外) 「この通信はどこに送るか？」を決めるルール集
 ・新しいルートテーブルを作成
 ・インターネットに出たい場合、0.0.0.0/0をIGWに追加する
 ●5.Elastic IP
@@ -282,7 +282,11 @@ VSコードでコマンドパレット(cmd+sft+p)でCompare Active file  with Sa
 ・22(SSH):自分のIP or 全て(開発用なら0.0.0.0/0)
 ・80(HTTP),443(HTTPS):公開Webアプリなら許可
 ・8080(Spring Boot):Spring Bootのアプリで使うなら
-
-●●●●●
+●7.EC2インスタンス(Elastic Compute Cloud):AWS上で使える「仮想マシン（VM：Virtual Machine）」のこと
+・ubuntuのAMI(Amazon Machine Image)を使って作成
+●8.SSH接続
+ssh -i ~/Downloads/your-key.pem ubuntu@<ElasticIP> //秘密鍵を用いて接続
+*  chmod 400 ~/Downloads/20250415_key_mishina.pem  //セキュリティの観点から自分だけ読み取りできるようにする
+●●●
 
 【】
