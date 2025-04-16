@@ -295,7 +295,8 @@ ubuntuが持っているソフトウエアの一覧表をインターネット�
 ●10.Javaを入れる
 sudo apt install openjdk-21-jdk
 (java -version で正しく入ったか確認)
-●
-
-
-【】
+●11 mysqlをインストールする
+sudo apt install mysql-server
+●12 gradleをインストールする
+sudo snap install gradle --classic (最新版を使いたい場合)
+【】●
